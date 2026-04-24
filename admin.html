@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaporinAdmin — Control Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin-body">
+
+<div id="toast-container" class="toast-container"></div>
+
+<div id="admin-login-view" class="admin-auth-screen">
+    <div class="admin-auth-card">
+        <div class="admin-auth-header">
+            <div class="admin-badge">Secure Access</div>
+            <h1>Admin Gateway</h1>
+            <p>Masukkan kredensial operasional untuk masuk ke dashboard.</p>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Email Operasional</label>
+            <input type="email" id="a-email" class="form-input" placeholder="admin@laporinaja.com">
+        </div>
+        <div class="form-group">
+            <label class="form-label">Password Sistem</label>
+            <input type="password" id="a-pass" class="form-input" placeholder="••••••••">
+        </div>
+        <button class="btn btn-primary btn-md" style="width:100%; justify-content:center;" id="btn-a-login">Otentikasi Sistem</button>
+    </div>
+</div>
+
+<div id="admin-main-view" style="display:none;" class="admin-layout">
+    <aside class="admin-sidebar">
+        <div class="sidebar-header">
+            <div class="logo-name">Laporin<span>Admin</span></div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active">
+                <span class="nav-icon">📊</span> Dashboard Laporan
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="admin-user-info">
+                <div class="admin-avatar" id="admin-initial">A</div>
+                <div class="admin-details">
+                    <p id="admin-display-name">Sistem Admin</p>
+                    <small id="admin-display-email">admin@mail.com</small>
+                </div>
+            </div>
+            <button class="btn btn-ghost btn-sm" id="a-logout" style="width:100%; margin-top: 15px; border-color: #fee2e2; color: #ef4444;">
+                Tutup Sesi
+            </button>
+        </div>
+    </aside>
+
+    <main class="admin-content">
+        <header class="content-header">
+            <div class="header-title">
+                <h1>Overview Laporan</h1>
+                <p>Manajemen data perbaikan fasilitas kampus secara real-time.</p>
+            </div>
+        </header>
+
+        <div class="admin-stats-grid">
+            <div class="stat-card">
+                <div class="stat-info">
+                    <span class="stat-label">Total Masuk</span>
+                    <h2 id="count-total">0</h2>
+                </div>
+                <div class="stat-icon" style="background: #eff6ff; color: #3b82f6;">📝</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-info">
+                    <span class="stat-label">Sedang Diproses</span>
+                    <h2 id="count-proses">0</h2>
+                </div>
+                <div class="stat-icon" style="background: #fefce8; color: #ca8a04;">🔧</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-info">
+                    <span class="stat-label">Selesai Perbaikan</span>
+                    <h2 id="count-selesai">0</h2>
+                </div>
+                <div class="stat-icon" style="background: #f0fdf4; color: #16a34a;">✅</div>
+            </div>
+        </div>
+
+        <div class="admin-table-area">
+            <div class="table-header">
+                <h3>Daftar Antrean Laporan</h3>
+                <div class="table-actions">
+                    <button class="btn btn-ghost btn-sm" onclick="location.reload()">Refresh Data</button>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="modern-table">
+                    <thead>
+                        <tr>
+                            <th>Tiket</th>
+                            <th>Pelapor</th>
+                            <th>Detail Fasilitas</th>
+                            <th>Foto Bukti</th>
+                            <th>Status Sistem</th>
+                            <th style="text-align: right;">Opsi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="report-table-body">
+                        </tbody>
+                </table>
+            </div>
+            <div id="admin-empty-state" class="empty-state" style="display:none;">
+                <p>Tidak ada laporan yang ditemukan.</p>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script type="module" src="admin-logic.js"></script>
+<script src="https://www.google.com/recaptcha/enterprise.js?render=6Leq_scsAAAAAL7-dVbRVsnuUbN1yVIZ94VTXuY"></script>
+</body>
+</html>

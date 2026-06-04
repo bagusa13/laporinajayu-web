@@ -39,6 +39,9 @@
             <a href="#" class="nav-item active">
                 <span class="nav-icon">📊</span> Dashboard Laporan
             </a>
+            <a href="#" class="nav-item" id="nav-biaya" onclick="scrollToSection('admin-table-area'); return false;">
+                <span class="nav-icon">💰</span> Kelola Biaya
+            </a>
         </nav>
         <div class="sidebar-footer">
             <div class="admin-user-info">
@@ -60,9 +63,18 @@
                 <h1>Overview Laporan</h1>
                 <p>Manajemen data perbaikan fasilitas kampus secara real-time.</p>
             </div>
+            <div style="display:flex; align-items:center; gap: 12px;">
+                <div class="header-live-badge">
+                    <span class="header-live-dot"></span> Live
+                </div>
+                <button class="btn btn-ghost btn-sm" onclick="location.reload()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                    Refresh
+                </button>
+            </div>
         </header>
 
-        <div class="admin-stats-grid">
+        <div class="admin-stats-grid admin-stats-grid--4">
             <div class="stat-card">
                 <div class="stat-info">
                     <span class="stat-label">Total Masuk</span>
@@ -84,12 +96,25 @@
                 </div>
                 <div class="stat-icon" style="background: #f0fdf4; color: #16a34a;">✅</div>
             </div>
+            <div class="stat-card stat-card--cost">
+                <div class="stat-info">
+                    <span class="stat-label">Total Estimasi Biaya</span>
+                    <h2 id="count-biaya" style="font-size: 20px;">Rp 0</h2>
+                </div>
+                <div class="stat-icon" style="background: #f0fdf4; color: #16a34a;">💰</div>
+            </div>
         </div>
 
-        <div class="admin-table-area">
+        <div class="admin-table-area" id="admin-table-area">
             <div class="table-header">
                 <h3>Daftar Antrean Laporan</h3>
-                <div class="table-actions">
+                <div class="table-actions" style="display:flex; gap:8px; align-items:center;">
+                    <select id="filter-status" class="status-dropdown" style="min-width: 140px;" onchange="filterTable()">
+                        <option value="">Semua Status</option>
+                        <option value="Menunggu">Menunggu</option>
+                        <option value="Diproses">Diproses</option>
+                        <option value="Selesai">Selesai</option>
+                    </select>
                     <button class="btn btn-ghost btn-sm" onclick="location.reload()">Refresh Data</button>
                 </div>
             </div>
@@ -101,15 +126,16 @@
                             <th>Pelapor</th>
                             <th>Detail Fasilitas</th>
                             <th>Foto Bukti</th>
+                            <th>Estimasi Biaya</th>
                             <th>Status Sistem</th>
                             <th style="text-align: right;">Opsi</th>
                         </tr>
                     </thead>
-                    <tbody id="report-table-body">
-                        </tbody>
+                    <tbody id="report-table-body"></tbody>
                 </table>
             </div>
             <div id="admin-empty-state" class="empty-state" style="display:none;">
+                <div style="font-size: 40px; margin-bottom: 12px;">📭</div>
                 <p>Tidak ada laporan yang ditemukan.</p>
             </div>
         </div>
@@ -117,5 +143,33 @@
 </div>
 
 <script type="module" src="admin-logic.js"></script>
+<script>
+function scrollToSection(id) {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Filter tabel berdasarkan status dengan transisi halus
+window.filterTable = function() {
+    const filterVal = document.getElementById('filter-status').value;
+    const rows = document.querySelectorAll('#report-table-body tr');
+    
+    rows.forEach(row => {
+        row.style.transition = "opacity 0.3s ease";
+        if (!filterVal) {
+            row.style.opacity = "1";
+            setTimeout(() => row.style.display = '', 300);
+        } else {
+            const statusCell = row.querySelector('[data-status]');
+            if (statusCell && statusCell.dataset.status === filterVal) {
+                row.style.display = '';
+                setTimeout(() => row.style.opacity = "1", 10);
+            } else {
+                row.style.opacity = "0";
+                setTimeout(() => row.style.display = 'none', 300);
+            }
+        }
+    });
+}
+</script>
 </body>
 </html>

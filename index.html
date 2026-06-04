@@ -13,9 +13,6 @@
 
 <div id="toast-container" class="toast-container"></div>
 
-<!-- ======================================================
-     NAVBAR
-====================================================== -->
 <nav class="navbar" id="navbar">
   <div class="navbar-inner">
     <a href="#" class="logo">
@@ -27,7 +24,7 @@
             <stop offset="100%" stop-color="#c2390b"/>
           </linearGradient>
         </defs>
-        <path d="M28 12C28 12 22 15 16 15H13C11.9 15 11 15.9 11 17V23C11 24.1 11.9 25 13 25H14L15 30H18L17 25H16C20 25 26 28 26 28V12H28Z" fill="white" opacity="0.9"/>
+        <path d="M28 12C28 12 22 15 16 15H13C11.9 15 11 17V23C11 24.1 11.9 25 13 25H14L15 30H18L17 25H16C20 25 26 28 26 28V12H28Z" fill="white" opacity="0.9"/>
         <circle cx="29" cy="20" r="2.5" fill="white" opacity="0.6"/>
         <path d="M29 14.5C31.2 16 32.5 17.9 32.5 20C32.5 22.1 31.2 24 29 25.5" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
       </svg>
@@ -36,19 +33,16 @@
         <div class="logo-sub">Telkom University</div>
       </div>
     </a>
-
     <ul class="nav-links">
       <li><a href="#cara-kerja">Cara Kerja</a></li>
       <li><a href="#kategori">Kategori</a></li>
       <li><a href="#fitur">Fitur</a></li>
       <li><a href="#tracking">Cek Status</a></li>
     </ul>
-
     <div class="nav-actions" id="auth-nav-actions">
       <button class="btn btn-ghost btn-sm" onclick="openModal('login')">Masuk</button>
-      <button class="btn btn-primary btn-sm" onclick="openModal('daftar')">Mulai Lapor</button>
+      <button class="btn btn-primary btn-sm" onclick="openModal('lapor')">Mulai Lapor</button>
     </div>
-
     <button class="hamburger" id="hamburger" aria-label="Buka menu" aria-expanded="false" aria-controls="mobile-nav">
       <span class="hamburger-line"></span>
       <span class="hamburger-line"></span>
@@ -57,7 +51,6 @@
   </div>
 </nav>
 
-<!-- Mobile Nav -->
 <nav class="mobile-nav" id="mobile-nav" aria-label="Menu navigasi mobile">
   <ul class="mobile-nav-links">
     <li><a href="#cara-kerja">Cara Kerja</a></li>
@@ -67,55 +60,46 @@
   </ul>
   <div class="mobile-nav-actions" id="mobile-auth-actions">
     <button class="btn btn-ghost btn-md" onclick="openModal('login')">Masuk</button>
-    <button class="btn btn-primary btn-md" onclick="openModal('daftar')">Mulai Lapor</button>
+    <button class="btn btn-primary btn-md" onclick="openModal('lapor')">Mulai Lapor</button>
   </div>
 </nav>
 
-<!-- ======================================================
-     HERO
-====================================================== -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid-pattern"></div>
   <div class="hero-blob-1"></div>
   <div class="hero-blob-2"></div>
-
   <div class="hero-inner">
-    <div class="hero-content">
+    <div class="hero-content reveal-up">
       <div class="hero-badge">
         <div class="hero-badge-dot"></div>
         Sistem Pelaporan Fasilitas Kampus
       </div>
-
       <h1 class="hero-title">
         Ada masalah?<br>
         <span class="highlight">Laporin aja,</span><br>
         yuk! 🙌
       </h1>
-
       <p class="hero-desc">
         Platform pelaporan fasilitas kampus Telkom University yang cepat, transparan, dan mudah digunakan. Laporkan kerusakan, pantau prosesnya secara real-time.
       </p>
-
       <div class="hero-actions">
         <button class="btn btn-primary btn-lg" onclick="openModal('lapor')">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
           Laporkan Sekarang
         </button>
         <a href="#tracking" class="btn btn-ghost btn-lg">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
           Cek Status
         </a>
       </div>
-
-      <div class="hero-stats">
+      <div class="hero-stats reveal-up delay-2">
         <div class="stat-item">
-          <!-- data-stat dipakai oleh loadHeroStats() di main.js -->
-          <div class="stat-number" data-stat="total">1.2K<span>+</span></div>
+          <div class="stat-number" data-stat="total">0<span>+</span></div>
           <div class="stat-label">Laporan Masuk</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number" data-stat="pct">94<span>%</span></div>
+          <div class="stat-number" data-stat="pct">0<span>%</span></div>
           <div class="stat-label">Diselesaikan</div>
         </div>
         <div class="stat-item">
@@ -124,15 +108,14 @@
         </div>
       </div>
     </div>
-
-    <div class="hero-visual">
+    <div class="hero-visual reveal-blur delay-1">
       <div class="hero-card-stack">
         <div class="card-behind-2"></div>
         <div class="card-behind-1"></div>
         <div class="report-card">
           <div class="report-card-header">
-            <div class="report-card-title">Tiket #LAP-2025-K9MX</div>
-            <span class="status-badge status-proses">🔧 Diproses</span>
+            <div class="report-card-title">Tiket #LAP-2026-K9MX</div>
+            <span class="status-badge status-selesai">✅ Selesai</span>
           </div>
           <div class="report-info-row">
             <div class="report-info-icon">📍</div>
@@ -152,45 +135,23 @@
             <div class="report-info-icon">👤</div>
             <div>
               <div class="report-info-label">Pelapor</div>
-              <div class="report-info-value">Budi Santoso · 22 Apr 2025</div>
-            </div>
-          </div>
-          <div class="report-info-row">
-            <div class="report-info-icon">⚡</div>
-            <div>
-              <div class="report-info-label">Prioritas</div>
-              <div class="report-info-value">Tinggi</div>
+              <div class="report-info-value">Budi Santoso · 22 Apr 2026</div>
             </div>
           </div>
         </div>
-
         <div class="floating-notif">
           <div class="notif-icon">✅</div>
           <div>
-            <div class="notif-text-title">Laporan Diverifikasi!</div>
-            <div class="notif-text-sub">Tim teknisi sedang ditugaskan</div>
+            <div class="notif-text-title">Perbaikan Selesai!</div>
+            <div class="notif-text-sub">Fasilitas sudah dapat digunakan.</div>
           </div>
         </div>
-
         <div class="floating-tracker">
           <div class="tracker-title">Status Laporan</div>
           <div class="tracker-steps">
-            <div class="tracker-step done-step">
-              <div class="tracker-dot done"></div>
-              <span class="tracker-step-label">Laporan dikirim</span>
-            </div>
-            <div class="tracker-step done-step">
-              <div class="tracker-dot done"></div>
-              <span class="tracker-step-label">Diverifikasi admin</span>
-            </div>
-            <div class="tracker-step">
-              <div class="tracker-dot active"></div>
-              <span class="tracker-step-label">Sedang diproses</span>
-            </div>
-            <div class="tracker-step">
-              <div class="tracker-dot pending"></div>
-              <span class="tracker-step-label">Selesai</span>
-            </div>
+            <div class="tracker-step done-step"><div class="tracker-dot done"></div><span class="tracker-step-label">Laporan dikirim</span></div>
+            <div class="tracker-step done-step"><div class="tracker-dot done"></div><span class="tracker-step-label">Sedang diproses</span></div>
+            <div class="tracker-step done-step"><div class="tracker-dot done"></div><span class="tracker-step-label">Selesai</span></div>
           </div>
         </div>
       </div>
@@ -198,190 +159,145 @@
   </div>
 </section>
 
-<!-- ======================================================
-     CARA KERJA
-====================================================== -->
 <section class="section" id="cara-kerja">
   <div class="section-inner">
-    <div class="section-header center">
+    <div class="section-header center reveal-up">
       <div class="section-eyebrow">Cara Kerja</div>
-      <h2 class="section-title">Lapor itu gampang, kok.</h2>
-      <p class="section-desc">Cuma 4 langkah dan laporan kamu langsung sampai ke tim yang tepat.</p>
+      <h2 class="section-title">Cukup 4 langkah mudah.</h2>
+      <p class="section-desc">Proses pelaporan dirancang sesederhana mungkin — bahkan tanpa akun sekalipun.</p>
     </div>
     <div class="steps-grid">
-      <div class="step-card">
+      <div class="step-card reveal-up">
         <div class="step-number">1</div>
-        <div class="step-title">Buat Akun</div>
-        <p class="step-desc">Daftar dengan email atau akun Google kamu. Proses cepat, tidak perlu menunggu verifikasi lama.</p>
+        <div class="step-title">Pilih Kategori</div>
+        <p class="step-desc">Pilih jenis fasilitas yang bermasalah dari daftar kategori yang tersedia.</p>
       </div>
-      <div class="step-card">
+      <div class="step-card reveal-up delay-1">
         <div class="step-number">2</div>
-        <div class="step-title">Isi Laporan</div>
-        <p class="step-desc">Pilih kategori, tuliskan lokasi dan deskripsi masalah, serta lampirkan foto kerusakan jika ada.</p>
+        <div class="step-title">Isi Detail Laporan</div>
+        <p class="step-desc">Deskripsikan masalah, lokasi, dan lampirkan foto sebagai bukti visual.</p>
       </div>
-      <div class="step-card">
+      <div class="step-card reveal-up delay-2">
         <div class="step-number">3</div>
-        <div class="step-title">Verifikasi Admin</div>
-        <p class="step-desc">Admin kampus memverifikasi laporanmu dan menugaskan tim teknisi yang sesuai dengan cepat.</p>
+        <div class="step-title">Kirim & Simpan Tiket</div>
+        <p class="step-desc">Laporan dikirim dan kamu mendapatkan nomor tiket unik untuk pelacakan.</p>
       </div>
-      <div class="step-card">
+      <div class="step-card reveal-up delay-3">
         <div class="step-number">4</div>
         <div class="step-title">Pantau Status</div>
-        <p class="step-desc">Lacak perkembangan laporanmu secara real-time sampai masalah benar-benar selesai.</p>
+        <p class="step-desc">Lacak status real-time laporan kamu melalui fitur cek status.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ======================================================
-     KATEGORI
-====================================================== -->
 <section class="categories-section" id="kategori">
   <div class="section-inner">
-    <div class="section-header">
-      <div class="section-eyebrow">Kategori Laporan</div>
-      <h2 class="section-title">Semua fasilitas,<br>satu platform.</h2>
-      <p class="section-desc">Dari AC yang rusak sampai lampu yang mati, semua bisa dilaporkan di sini.</p>
+    <div class="section-header center reveal-up">
+      <div class="section-eyebrow">Kategori Fasilitas</div>
+      <h2 class="section-title">Semua jenis fasilitas<br>kampus tercakup.</h2>
     </div>
     <div class="categories-grid">
-      <div class="category-card"><div class="category-icon-wrap cat-blue">❄️</div><div class="category-name">AC & Pendingin</div><div class="category-count">127 laporan</div></div>
-      <div class="category-card"><div class="category-icon-wrap cat-yellow">💡</div><div class="category-name">Listrik & Lampu</div><div class="category-count">89 laporan</div></div>
-      <div class="category-card"><div class="category-icon-wrap cat-teal">🚿</div><div class="category-name">Sanitasi & Toilet</div><div class="category-count">74 laporan</div></div>
-      <div class="category-card"><div class="category-icon-wrap cat-purple">📽️</div><div class="category-name">Proyektor & AV</div><div class="category-count">62 laporan</div></div>
-      <div class="category-card"><div class="category-icon-wrap cat-orange">🪑</div><div class="category-name">Furnitur & Kursi</div><div class="category-count">51 laporan</div></div>
-      <div class="category-card"><div class="category-icon-wrap cat-red">🚪</div><div class="category-name">Pintu & Jendela</div><div class="category-count">43 laporan</div></div>
-      <div class="category-card"><div class="category-icon-wrap cat-green">🏗️</div><div class="category-name">Struktur & Bangunan</div><div class="category-count">38 laporan</div></div>
-      <div class="category-card"><div class="category-icon-wrap cat-gray">🔧</div><div class="category-name">Lainnya</div><div class="category-count">96 laporan</div></div>
+      <div class="category-card reveal-scale" onclick="openModal('lapor')"><div class="category-icon-wrap cat-blue">❄️</div><div class="category-name">AC & Pendingin</div><div class="category-count">Paling sering dilaporkan</div></div>
+      <div class="category-card reveal-scale delay-1" onclick="openModal('lapor')"><div class="category-icon-wrap cat-teal">⚡</div><div class="category-name">Listrik & Lampu</div><div class="category-count">Prioritas Tinggi</div></div>
+      <div class="category-card reveal-scale delay-2" onclick="openModal('lapor')"><div class="category-icon-wrap cat-green">🚿</div><div class="category-name">Sanitasi & Toilet</div><div class="category-count">Respons cepat</div></div>
+      <div class="category-card reveal-scale delay-3" onclick="openModal('lapor')"><div class="category-icon-wrap cat-yellow">📽️</div><div class="category-name">Proyektor & AV</div><div class="category-count">Jadwal fleksibel</div></div>
+      <div class="category-card reveal-scale" onclick="openModal('lapor')"><div class="category-icon-wrap cat-red">🪑</div><div class="category-name">Furnitur & Kursi</div><div class="category-count">Pergantian & perbaikan</div></div>
+      <div class="category-card reveal-scale delay-1" onclick="openModal('lapor')"><div class="category-icon-wrap cat-purple">🚪</div><div class="category-name">Pintu & Jendela</div><div class="category-count">Keamanan & kenyamanan</div></div>
+      <div class="category-card reveal-scale delay-2" onclick="openModal('lapor')"><div class="category-icon-wrap cat-orange">🏗️</div><div class="category-name">Infrastruktur</div><div class="category-count">Bangunan & struktur</div></div>
+      <div class="category-card reveal-scale delay-3" onclick="openModal('lapor')"><div class="category-icon-wrap cat-gray">📋</div><div class="category-name">Lainnya</div><div class="category-count">Masalah lain</div></div>
     </div>
   </div>
 </section>
 
-<!-- ======================================================
-     FITUR
-====================================================== -->
 <section class="features-section" id="fitur">
   <div class="section-inner">
-    <div class="section-header">
+    <div class="section-header center reveal-up">
       <div class="section-eyebrow">Fitur Unggulan</div>
       <h2 class="section-title">Dirancang untuk<br>kemudahan semua pihak.</h2>
     </div>
     <div class="features-grid">
-      <div class="feature-big">
+      <div class="feature-big reveal-blur">
         <div>
           <div class="feature-big-icon">🚀</div>
           <div class="feature-big-title">Ekosistem Pelaporan Digital yang Holistik & Responsif</div>
-          <p class="feature-big-desc">
-            Platform yang menjembatani komunikasi antara sivitas akademika dan tim operasional kampus secara cerdas. Setiap laporan ditangani dengan alur kerja yang terotomatisasi, transparan, dan dapat dipertanggungjawabkan.
-          </p>
+          <p class="feature-big-desc">Platform yang menjembatani komunikasi antara sivitas akademika dan tim operasional kampus secara cerdas. Setiap laporan ditangani dengan alur kerja yang terotomatisasi, transparan, dan dapat dipertanggungjawabkan.</p>
         </div>
       </div>
-
       <div class="feature-smalls">
-        <div class="feature-small">
+        <div class="feature-small reveal-scale delay-1">
           <div class="feature-small-icon cat-blue">📸</div>
           <div class="feature-small-title">Visualisasi Bukti</div>
           <p class="feature-small-desc">Unggah foto kerusakan langsung untuk representasi visual yang akurat dan diagnosa awal yang cepat.</p>
         </div>
-        <div class="feature-small">
+        <div class="feature-small reveal-scale delay-2">
           <div class="feature-small-icon cat-teal">🔍</div>
           <div class="feature-small-title">Monitoring Real-Time</div>
           <p class="feature-small-desc">Pantau setiap fase penanganan laporan melalui sistem pelacakan berbasis status yang diperbarui otomatis.</p>
         </div>
-        <div class="feature-small">
-          <div class="feature-small-icon cat-green">🔔</div>
-          <div class="feature-small-title">Notifikasi Instan</div>
-          <p class="feature-small-desc">Dapatkan pembaruan status laporan secara instan. Tetap terhubung tanpa harus mengecek manual.</p>
+        <div class="feature-small reveal-scale delay-1">
+          <div class="feature-small-icon" style="background:#fefce8; color:#ca8a04;">🔒</div>
+          <div class="feature-small-title">Aman & Terpercaya</div>
+          <p class="feature-small-desc">Data laporan tersimpan aman di cloud dengan tingkat ketersediaan tinggi (high availability).</p>
         </div>
-        <div class="feature-small">
-          <div class="feature-small-icon cat-yellow">⚡</div>
-          <div class="feature-small-title">Skala Prioritas</div>
-          <p class="feature-small-desc">Sistem mengklasifikasikan laporan berdasarkan urgensi agar kendala krusial ditangani lebih awal.</p>
+        <div class="feature-small reveal-scale delay-2">
+          <div class="feature-small-icon" style="background:#fff7ed; color:#ea580c;">👤</div>
+          <div class="feature-small-title">Lapor Tanpa Akun</div>
+          <p class="feature-small-desc">Tidak perlu registrasi. Siapa saja bisa melapor secara anonim hanya dengan nama dan email.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ======================================================
-     STATS
-====================================================== -->
 <section class="stats-section">
   <div class="stats-inner">
-    <div style="text-align:center; margin-bottom: var(--space-16);">
-      <div class="section-eyebrow" style="color: var(--red-300); border-color: rgba(229,62,62,0.3); background: rgba(229,62,62,0.1);">Dalam Angka</div>
+    <div style="text-align:center; margin-bottom: var(--space-16);" class="reveal-up">
+      <div class="section-eyebrow" style="background: rgba(229,62,62,0.15); border: none;">Dalam Angka</div>
       <h2 class="section-title" style="color: white; margin-top: var(--space-3);">Dampak nyata<br>bagi kampus kita.</h2>
     </div>
     <div class="stats-grid">
-      <div>
-        <div class="big-stat-number">1.2K+</div>
-        <div class="big-stat-label">Total Laporan Masuk</div>
-      </div>
-      <div>
-        <div class="big-stat-number">94%</div>
-        <div class="big-stat-label">Tingkat Penyelesaian</div>
-      </div>
-      <div>
-        <div class="big-stat-number">&lt;3hr</div>
-        <div class="big-stat-label">Rata-rata Waktu Respon</div>
-      </div>
-      <div>
-        <div class="big-stat-number">8+</div>
-        <div class="big-stat-label">Kategori Fasilitas</div>
-      </div>
+      <div class="reveal-up"><div class="big-stat-number" id="stat-bottom-total">0</div><div class="big-stat-label">Total Laporan Masuk</div></div>
+      <div class="reveal-up delay-1"><div class="big-stat-number" id="stat-bottom-pct">0%</div><div class="big-stat-label">Tingkat Penyelesaian</div></div>
+      <div class="reveal-up delay-2"><div class="big-stat-number">&lt;3hr</div><div class="big-stat-label">Rata-rata Waktu Respon</div></div>
+      <div class="reveal-up delay-3"><div class="big-stat-number">8+</div><div class="big-stat-label">Kategori Fasilitas</div></div>
     </div>
   </div>
 </section>
 
-<!-- ======================================================
-     TRACKING
-====================================================== -->
 <section class="section" id="tracking">
   <div class="section-inner">
-    <div class="section-header center">
+    <div class="section-header center reveal-up">
       <div class="section-eyebrow">Cek Status</div>
       <h2 class="section-title">Laporanmu sudah sampai mana?</h2>
-      <p class="section-desc">Masukkan nomor tiket atau email untuk melihat perkembangan terkini.</p>
+      <p class="section-desc">Masukkan nomor tiket atau email untuk melihat perkembangan terkini fasilitas yang kamu laporkan.</p>
     </div>
-
-    <div style="max-width: 520px; margin: 0 auto;">
-      <div style="background: white; border-radius: var(--radius-2xl); padding: var(--space-8); border: 1px solid var(--neutral-150); box-shadow: var(--shadow-md);">
-        <div class="form-group">
-          <label class="form-label">Nomor Tiket atau Email Aktif</label>
-          <input
-            type="text"
-            class="form-input"
-            placeholder="Contoh: #LAP-2025-K9MX atau nama@email.com"
-            id="trackInput"
-          >
+    <div style="max-width: 540px; margin: 0 auto;" class="reveal-scale">
+      <div style="background: white; border-radius: var(--radius-3xl); padding: var(--space-10); border: 1px solid var(--neutral-150); box-shadow: var(--shadow-xl);">
+        <div class="form-group-floating">
+          <input type="text" class="form-input-floating" id="trackInput" placeholder=" ">
+          <label class="form-label-floating">Nomor Tiket atau Email Aktif</label>
         </div>
-        <button class="btn btn-primary btn-md" style="width:100%; justify-content:center;" id="btn-track" onclick="handleTrack()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-          Cek Status Laporan
+        <button class="btn btn-primary btn-md" style="width:100%; justify-content:center; padding: 16px;" id="btn-track" onclick="handleTrack()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Lacak Laporan
         </button>
-
-        <div id="trackError" class="track-message track-message-error" style="display:none; margin-top: var(--space-3);">
-          ⚠️ Nomor tiket atau email wajib diisi.
-        </div>
-        <div id="trackNotFound" class="track-message track-message-notfound" style="display:none; margin-top: var(--space-3);">
-          🔍 Laporan tidak ditemukan di sistem.
-        </div>
-        <div id="trackResult" style="display:none; margin-top: var(--space-5); padding: var(--space-5); background: var(--neutral-50); border-radius: var(--radius-xl); border: 1px solid var(--neutral-150);"></div>
+        <div id="trackError" class="track-message track-message-error">⚠️ Nomor tiket atau email wajib diisi.</div>
+        <div id="trackNotFound" class="track-message track-message-notfound">🔍 Laporan tidak ditemukan di sistem.</div>
+        <div id="trackResult" style="display:none; margin-top: var(--space-6);"></div>
       </div>
-      <p style="text-align:center; font-size: var(--text-sm); color: var(--neutral-400); margin-top: var(--space-4);">
+      <p style="text-align:center; font-size: var(--text-sm); color: var(--neutral-500); margin-top: var(--space-6);">
         Belum punya laporan?
-        <a href="#" onclick="openModal('lapor'); return false;" style="color: var(--red-600); font-weight: var(--weight-semibold);">Buat laporan sekarang →</a>
+        <a href="#" onclick="openModal('lapor'); return false;" style="color: var(--red-600); font-weight: var(--weight-bold);">Buat laporan sekarang →</a>
       </p>
     </div>
   </div>
 </section>
 
-<!-- ======================================================
-     CTA
-====================================================== -->
 <section class="cta-section">
-  <div class="cta-card">
+  <div class="cta-card reveal-blur">
     <h2 class="cta-title">Lihat ada masalah?<br>Jangan diam aja! 👀</h2>
-    <p class="cta-desc">Laporkan sekarang dan bantu buat kampus kita jadi tempat belajar yang lebih nyaman untuk semua.</p>
+    <p class="cta-desc">Laporkan sekarang dan bantu buat kampus kita jadi tempat belajar yang lebih nyaman untuk semua. Tidak perlu akun!</p>
     <div class="cta-actions">
       <button class="btn btn-primary btn-lg" onclick="openModal('lapor')">Laporin Sekarang</button>
       <button class="btn btn-ghost btn-lg" onclick="openModal('login')">Sudah punya akun? Masuk</button>
@@ -389,12 +305,9 @@
   </div>
 </section>
 
-<!-- ======================================================
-     FOOTER
-====================================================== -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-top">
+    <div class="footer-top reveal-up">
       <div>
         <div class="footer-brand-name">Laporin<span>Aja</span></div>
         <p class="footer-brand-desc">Platform pelaporan fasilitas kampus Telkom University. Laporkan kerusakan, pantau prosesnya, bantu kampus lebih baik.</p>
@@ -413,6 +326,7 @@
         <ul class="footer-links">
           <li><a href="#" onclick="openModal('daftar'); return false">Daftar</a></li>
           <li><a href="#" onclick="openModal('login'); return false">Masuk</a></li>
+          <li><a href="#" onclick="openModal('lapor'); return false" style="color: var(--red-400);">Lapor Anonim →</a></li>
         </ul>
       </div>
       <div>
@@ -425,7 +339,7 @@
         </ul>
       </div>
     </div>
-    <div class="footer-bottom">
+    <div class="footer-bottom reveal-up delay-1">
       <div>© 2026 LaporinAja · Telkom University. Hak cipta dilindungi.</div>
       <div class="footer-bottom-links">
         <a href="#">Kebijakan Privasi</a>
@@ -436,122 +350,142 @@
   </div>
 </footer>
 
-<!-- ======================================================
-     MODAL
-====================================================== -->
 <div class="modal-overlay" id="modal" onclick="handleOverlayClick(event)" aria-modal="true" role="dialog" aria-hidden="true">
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()" aria-label="Tutup modal">✕</button>
-
     <div class="modal-logo">
-      <svg width="30" height="30" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="36" height="36" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="40" height="40" rx="10" fill="url(#mLogo)"/>
-        <defs>
-          <linearGradient id="mLogo" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#E53E3E"/>
-            <stop offset="100%" stop-color="#c2390b"/>
-          </linearGradient>
-        </defs>
+        <defs><linearGradient id="mLogo" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#E53E3E"/><stop offset="100%" stop-color="#c2390b"/></linearGradient></defs>
         <path d="M28 12C28 12 22 15 16 15H13C11.9 15 11 15.9 11 17V23C11 24.1 11.9 25 13 25H14L15 30H18L17 25H16C20 25 26 28 26 28V12H28Z" fill="white" opacity="0.9"/>
       </svg>
-      <span style="font-size: var(--text-lg); font-weight: var(--weight-extrabold); color: var(--neutral-900); letter-spacing: -0.03em;">
-        Laporin<span style="color: var(--red-500);">Aja</span>
-      </span>
+      <span style="font-size: var(--text-xl); font-weight: var(--weight-extrabold); color: var(--neutral-900); letter-spacing: -0.03em;">Laporin<span style="color: var(--red-500);">Aja</span></span>
     </div>
 
-    <!-- PANEL: Auth (Login / Register) -->
     <div id="panel-user">
       <div class="tab-buttons">
+        <div class="tab-indicator" id="tab-indicator"></div>
         <button class="tab-btn active" id="tab-masuk" onclick="switchTab('masuk')">Masuk</button>
         <button class="tab-btn" id="tab-daftar" onclick="switchTab('daftar')">Daftar</button>
       </div>
-
-      <!-- Form Masuk -->
+      
       <div id="form-masuk">
-        <div class="form-group">
-          <label class="form-label">Email</label>
-          <input type="email" class="form-input" id="masuk-email" placeholder="nama@email.com" autocomplete="email">
+        <div class="form-group-floating">
+          <input type="email" class="form-input-floating" id="masuk-email" placeholder=" " autocomplete="email">
+          <label class="form-label-floating">Email</label>
         </div>
-        <div class="form-group">
-          <label class="form-label">Password</label>
-          <input type="password" class="form-input" id="masuk-password" placeholder="Masukkan password" autocomplete="current-password">
+        <div class="form-group-floating">
+          <input type="password" class="form-input-floating" id="masuk-password" placeholder=" " autocomplete="current-password">
+          <label class="form-label-floating">Password</label>
         </div>
-        <button class="btn btn-primary btn-md" id="btn-masuk" style="width:100%; justify-content:center; margin-top: var(--space-2);">
-          Masuk ke Akun
-        </button>
+        <button class="btn btn-primary btn-md" id="btn-masuk" style="width:100%; justify-content:center; margin-top: var(--space-4);">Masuk ke Akun</button>
         <div class="divider">atau</div>
         <button class="btn btn-ghost btn-md" id="btn-google-login" style="width:100%; justify-content:center;">
-          <svg width="17" height="17" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
           Masuk dengan Google
         </button>
       </div>
-
-      <!-- Form Daftar -->
+      
       <div id="form-daftar" style="display:none;">
-        <div class="form-group">
-          <label class="form-label">Nama Lengkap</label>
-          <input type="text" class="form-input" id="daftar-nama" placeholder="Nama lengkapmu" autocomplete="name">
+        <div class="form-group-floating">
+          <input type="text" class="form-input-floating" id="daftar-nama" placeholder=" " autocomplete="name">
+          <label class="form-label-floating">Nama Lengkap</label>
         </div>
-        <div class="form-group">
-          <label class="form-label">Email</label>
-          <input type="email" class="form-input" id="daftar-email" placeholder="nama@email.com" autocomplete="email">
+        <div class="form-group-floating">
+          <input type="email" class="form-input-floating" id="daftar-email" placeholder=" " autocomplete="email">
+          <label class="form-label-floating">Email</label>
         </div>
-        <div class="form-group">
-          <label class="form-label">Password <span style="color: var(--neutral-400); font-weight: 400;">(min. 8 karakter)</span></label>
-          <input type="password" class="form-input" id="daftar-password" placeholder="Minimal 8 karakter" autocomplete="new-password">
+        <div class="form-group-floating">
+          <input type="password" class="form-input-floating" id="daftar-password" placeholder=" " autocomplete="new-password">
+          <label class="form-label-floating">Password (min. 8 karakter)</label>
         </div>
-        <div class="form-group">
-          <label class="form-label">Konfirmasi Password</label>
-          <input type="password" class="form-input" id="daftar-konfirmasi" placeholder="Ulangi password kamu" autocomplete="new-password">
+        <div class="form-group-floating">
+          <input type="password" class="form-input-floating" id="daftar-konfirmasi" placeholder=" " autocomplete="new-password">
+          <label class="form-label-floating">Konfirmasi Password</label>
         </div>
-        <button class="btn btn-primary btn-md" id="btn-daftar" style="width:100%; justify-content:center; margin-top: var(--space-2);">
-          Buat Akun
-        </button>
+        <button class="btn btn-primary btn-md" id="btn-daftar" style="width:100%; justify-content:center; margin-top: var(--space-4);">Buat Akun</button>
         <div class="divider">atau</div>
         <button class="btn btn-ghost btn-md" id="btn-google-reg" style="width:100%; justify-content:center;">
-          <svg width="17" height="17" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
           Daftar dengan Google
         </button>
       </div>
     </div>
 
-    <!-- PANEL: Form Laporan -->
     <div id="panel-lapor" style="display:none;">
       <div style="margin-bottom: var(--space-6);">
         <div class="modal-title">Form Pelaporan</div>
         <p style="font-size: var(--text-sm); color: var(--neutral-500); margin-top: 4px; line-height: 1.6;">Isi data di bawah dengan jelas agar teknisi dapat menangani dengan cepat.</p>
       </div>
 
+      <div class="lapor-mode-tabs" id="lapor-mode-tabs">
+        <div class="lapor-mode-indicator" id="lapor-mode-indicator"></div>
+        <button class="lapor-mode-btn active" id="btn-mode-akun" onclick="switchLaporMode('akun')">🔑 Dengan Akun</button>
+        <button class="lapor-mode-btn" id="btn-mode-anon" onclick="switchLaporMode('anon')">👤 Lapor Anonim</button>
+      </div>
+
+      <div id="lapor-logged-info" style="display:none; margin-bottom: var(--space-6);">
+        <div class="reporter-chip" style="display: flex; align-items: center; gap: 12px; background: var(--neutral-50); padding: 12px 16px; border-radius: var(--radius-xl); border: 1px solid var(--neutral-200);">
+          <div class="reporter-chip-avatar" id="lapor-chip-avatar" style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--red-500), #f97316); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 16px;">U</div>
+          <div style="flex: 1;">
+            <div id="lapor-chip-name" style="font-size:var(--text-base);font-weight:var(--weight-bold);color:var(--neutral-900);"></div>
+            <div id="lapor-chip-email" style="font-size:var(--text-xs);color:var(--neutral-500);"></div>
+          </div>
+          <span class="reporter-chip-badge" style="background: var(--color-success-bg); color: #14532d; font-size: 10px; font-weight: bold; padding: 4px 8px; border-radius: 100px; border: 1px solid var(--color-success-border);">Terverifikasi ✓</span>
+        </div>
+      </div>
+
+      <div id="form-anon-fields" style="display:none;">
+        <div class="anon-info-notice" style="display: flex; gap: 12px; background: #fffbeb; padding: 12px 16px; border-radius: var(--radius-xl); border: 1px solid #fde68a; margin-bottom: var(--space-5);">
+          <span style="font-size: 20px;">👤</span>
+          <div>
+            <strong style="font-size: var(--text-sm); color: #92400e;">Mode Anonim</strong><br>
+            <span style="font-size: 12px; color: #b45309;">Simpan nomor tiket atau email untuk melacak laporan kamu nanti.</span>
+          </div>
+        </div>
+        <div class="form-group-floating">
+          <input type="text" class="form-input-floating" id="anon-nama" placeholder=" ">
+          <label class="form-label-floating">Nama Kamu *</label>
+        </div>
+        <div class="form-group-floating">
+          <input type="email" class="form-input-floating" id="anon-email" placeholder=" ">
+          <label class="form-label-floating">Email (Opsional untuk cek status)</label>
+        </div>
+      </div>
+
       <div class="form-group">
-        <label class="form-label">Kategori Kerusakan</label>
-        <select class="form-input" id="lapor-kategori">
+        <label class="form-label">Kategori Kerusakan *</label>
+        <select class="form-input" id="lapor-kategori" style="padding: 16px;">
           <option value="" disabled selected>Pilih jenis fasilitas...</option>
-          <option value="AC & Pendingin">AC & Pendingin</option>
-          <option value="Listrik & Lampu">Listrik & Lampu</option>
-          <option value="Sanitasi & Toilet">Sanitasi & Toilet</option>
-          <option value="Proyektor & AV">Proyektor & AV</option>
-          <option value="Furnitur & Kursi">Furnitur & Kursi</option>
-          <option value="Pintu & Jendela">Pintu & Jendela</option>
-          <option value="Infrastruktur & Bangunan">Infrastruktur & Bangunan</option>
-          <option value="Lainnya">Lainnya</option>
+          <option value="AC & Pendingin">❄️ AC & Pendingin</option>
+          <option value="Listrik & Lampu">⚡ Listrik & Lampu</option>
+          <option value="Sanitasi & Toilet">🚿 Sanitasi & Toilet</option>
+          <option value="Proyektor & AV">📽️ Proyektor & AV</option>
+          <option value="Furnitur & Kursi">🪑 Furnitur & Kursi</option>
+          <option value="Pintu & Jendela">🚪 Pintu & Jendela</option>
+          <option value="Infrastruktur & Bangunan">🏗️ Infrastruktur & Bangunan</option>
+          <option value="Lainnya">📋 Lainnya</option>
         </select>
       </div>
-      <div class="form-group">
-        <label class="form-label">Lokasi Spesifik</label>
-        <input type="text" class="form-input" id="lapor-lokasi" placeholder="Contoh: Gedung B, Lantai 3, Kelas 301">
+      <div class="form-group-floating">
+        <input type="text" class="form-input-floating" id="lapor-lokasi" placeholder=" ">
+        <label class="form-label-floating">Lokasi Spesifik * (Contoh: Gedung B, Kelas 301)</label>
+      </div>
+      <div class="form-group-floating">
+        <textarea class="form-input-floating" id="lapor-deskripsi" rows="3" placeholder=" " style="resize:vertical;"></textarea>
+        <label class="form-label-floating">Deskripsi Kendala *</label>
       </div>
       <div class="form-group">
-        <label class="form-label">Deskripsi Kendala</label>
-        <textarea class="form-input" id="lapor-deskripsi" rows="3" placeholder="Jelaskan detail kerusakan (min. 10 karakter)..." style="resize:vertical;"></textarea>
+        <label class="form-label">Lampirkan Foto <span style="color: var(--neutral-400); font-weight: 400;">(Opsional · Max 5MB · JPG/PNG)</span></label>
+        <input type="file" class="form-input" id="lapor-foto" accept="image/jpeg,image/png,image/webp,image/gif" style="padding: 12px; background: var(--neutral-0);">
+        
+        <div id="preview-container" style="display: none; margin-top: 16px; position: relative; width: fit-content;">
+            <img id="foto-preview" src="" alt="Preview" style="max-width: 100%; height: 160px; object-fit: cover; border-radius: var(--radius-lg); border: 2px solid var(--neutral-200); box-shadow: var(--shadow-md);">
+            <button id="hapus-foto" type="button" style="position: absolute; top: -12px; right: -12px; background: var(--color-danger); color: white; border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; box-shadow: 0 4px 12px rgba(220,38,38,0.4); transition: transform var(--t-fast);">✕</button>
+        </div>
       </div>
-      <div class="form-group">
-        <label class="form-label">
-          Lampirkan Foto
-          <span style="color: var(--neutral-400); font-weight: 400;">(Opsional · Max 5MB · JPG/PNG/WEBP)</span>
-        </label>
-        <input type="file" class="form-input" id="lapor-foto" accept="image/jpeg,image/png,image/webp,image/gif" style="padding: var(--space-2);">
-      </div>
-      <button class="btn btn-primary btn-md" id="btn-submit-laporan" style="width:100%; justify-content:center; margin-top: var(--space-2);">
+      <button class="btn btn-primary btn-md" id="btn-submit-laporan" style="width:100%; justify-content:center; margin-top: var(--space-4); padding: 16px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
         Kirim Laporan Kerusakan
       </button>
     </div>

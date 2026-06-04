@@ -1048,3 +1048,17 @@ footer { background: var(--neutral-950); color: var(--neutral-400); padding: var
   background: var(--neutral-0) !important; 
   animation: borderGlow 2s infinite alternate !important; 
 }
+
+
+/* Absolute Failsafe for Admin Cursor */
+body.admin-body, 
+body.admin-body *,
+.admin-body a, .admin-body button, .admin-body input, .admin-body select, .admin-body textarea {
+    cursor: auto !important;
+}
+.admin-body a, .admin-body button, .admin-body .category-card-img, .admin-body .nav-item {
+    cursor: pointer !important;
+}
+.admin-body input, .admin-body textarea {
+    cursor: text !important;
+}

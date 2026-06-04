@@ -1098,3 +1098,11 @@ window.setFavicon = function(state) {
         link.href = 'data:image/svg+xml;base64,' + btoa(svg);
     }
 };
+
+
+// ==========================================
+//   DEVELOPER EASTER EGG
+// ==========================================
+console.log("%c🚀 LAPORIN AJA - TELKOM UNIVERSITY", "font-size: 24px; font-weight: bold; color: #E53E3E; text-shadow: 2px 2px 0px #000;");
+console.log("%cWebsite ini dirakit dengan presisi level piksel dan performa maksimal.", "font-size: 14px; color: #10B981;");
+console.log("%cIngin melihat di balik layar? Kunjungi /admin.html", "font-size: 12px; color: #64748b; font-style: italic;");

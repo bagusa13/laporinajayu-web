@@ -405,6 +405,9 @@
         <div class="form-group-floating">
           <input type="password" class="form-input-floating" id="masuk-password" placeholder=" " autocomplete="current-password" required>
           <label class="form-label-floating" for="masuk-password">Password</label>
+          <button type="button" class="password-toggle" aria-label="Tampilkan password" onclick="togglePassword(this)">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="eye-icon"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          </button>
         </div>
         <button class="btn btn-primary btn-md" id="btn-masuk" class="btn-submit-full">Masuk ke Akun</button>
         <div class="divider">atau</div>
@@ -426,10 +429,16 @@
         <div class="form-group-floating">
           <input type="password" class="form-input-floating" id="daftar-password" placeholder=" " autocomplete="new-password" required minlength="8">
           <label class="form-label-floating" for="daftar-password">Password (min. 8 karakter)</label>
+          <button type="button" class="password-toggle" aria-label="Tampilkan password" onclick="togglePassword(this)">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="eye-icon"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          </button>
         </div>
         <div class="form-group-floating">
           <input type="password" class="form-input-floating" id="daftar-konfirmasi" placeholder=" " autocomplete="new-password" required minlength="8">
           <label class="form-label-floating" for="daftar-konfirmasi">Konfirmasi Password</label>
+          <button type="button" class="password-toggle" aria-label="Tampilkan password" onclick="togglePassword(this)">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="eye-icon"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          </button>
         </div>
         <button class="btn btn-primary btn-md" id="btn-daftar" class="btn-submit-full">Buat Akun</button>
         <div class="divider">atau</div>
@@ -522,5 +531,22 @@
 </div>
 
 <script type="module" src="main.js"></script>
+
+<script>
+function togglePassword(btn) {
+  const container = btn.closest('.form-group-floating');
+  const input = container.querySelector('input');
+  const svg = btn.querySelector('svg');
+  if(input.type === 'password') {
+    input.type = 'text';
+    svg.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>';
+    btn.setAttribute('aria-label', 'Sembunyikan password');
+  } else {
+    input.type = 'password';
+    svg.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>';
+    btn.setAttribute('aria-label', 'Tampilkan password');
+  }
+}
+</script>
 </body>
 </html>

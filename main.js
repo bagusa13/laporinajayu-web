@@ -914,3 +914,94 @@ window.addEventListener('load', () => {
         }, 500);
     }
 });
+
+
+/* ==========================================================================
+   CUSTOM CURSOR & MAGNETIC BUTTONS LOGIC
+   ========================================================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Scroll Progress Bar
+    const scrollProgress = document.getElementById('scroll-progress');
+    if (scrollProgress) {
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercent = (scrollTop / scrollHeight) * 100;
+            scrollProgress.style.width = scrollPercent + '%';
+        });
+    }
+
+    // Check if device supports hover (desktop)
+    if (window.matchMedia("(min-width: 1024px) and (hover: hover)").matches) {
+        // 2. Custom Cursor
+        const cursor = document.getElementById('custom-cursor');
+        const follower = document.getElementById('custom-cursor-follower');
+        
+        let mouseX = 0, mouseY = 0;
+        let followerX = 0, followerY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            // Immediate update for the dot
+            if(cursor) {
+                cursor.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+            }
+        });
+
+        // Smooth trailing for the follower
+        function animateFollower() {
+            followerX += (mouseX - followerX) * 0.15; // smoothness factor
+            followerY += (mouseY - followerY) * 0.15;
+            
+            if(follower) {
+                follower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0) translate(-50%, -50%)`;
+            }
+            requestAnimationFrame(animateFollower);
+        }
+        animateFollower();
+
+        // Add hover effects to interactable elements
+        const interactables = document.querySelectorAll('a, button, input, select, textarea, .category-card-img, .logo');
+        interactables.forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+        });
+
+        // Hide cursor when it leaves window
+        document.addEventListener('mouseleave', () => document.body.classList.add('cursor-hidden'));
+        document.addEventListener('mouseenter', () => document.body.classList.remove('cursor-hidden'));
+
+        // 3. Magnetic Buttons
+        const magnetics = document.querySelectorAll('.magnetic');
+        magnetics.forEach(btn => {
+            // Wrap content in span if not already to parallax text
+            if(!btn.querySelector('span')) {
+                const inner = btn.innerHTML;
+                btn.innerHTML = `<span>${inner}</span>`;
+            }
+            
+            const text = btn.querySelector('span');
+
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left; 
+                const y = e.clientY - rect.top;
+                
+                // Calculate pull (max 15px)
+                const pullX = (x - rect.width / 2) / (rect.width / 2) * 15;
+                const pullY = (y - rect.height / 2) / (rect.height / 2) * 15;
+                
+                btn.style.transform = `translate(${pullX}px, ${pullY}px)`;
+                if(text) text.style.transform = `translate(${pullX * 0.5}px, ${pullY * 0.5}px)`;
+            });
+
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0px, 0px)';
+                if(text) text.style.transform = 'translate(0px, 0px)';
+            });
+        });
+    }
+});

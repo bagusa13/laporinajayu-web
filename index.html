@@ -48,7 +48,6 @@
       <li><a href="#tracking">Cek Status</a></li>
     </ul>
     <div class="nav-actions" id="auth-nav-actions">
-      <button class="theme-toggle" id="theme-toggle-desktop" aria-label="Toggle Dark Mode">🌙</button>
       <div id="desktop-auth-container" style="display:flex; align-items:center; gap:var(--space-2);">
         <button class="btn btn-ghost btn-sm" onclick="openModal('login')">Masuk</button>
         <button class="btn btn-primary btn-sm" onclick="openModal('lapor')">Mulai Lapor</button>
@@ -70,7 +69,6 @@
     <li><a href="#tracking">Cek Status</a></li>
   </ul>
   <div class="mobile-nav-actions" id="mobile-auth-actions">
-    <button class="theme-toggle" id="theme-toggle-mobile" aria-label="Toggle Dark Mode" style="margin: 0 auto var(--space-4);">🌙</button>
     <div id="mobile-auth-container" style="display:flex; flex-direction:column; gap:var(--space-4);">
       <button class="btn btn-ghost btn-md" onclick="openModal('login')">Masuk</button>
       <button class="btn btn-primary btn-md" onclick="openModal('lapor')">Mulai Lapor</button>
@@ -363,19 +361,6 @@
     </div>
   </div>
 </footer>
-
-<!-- MODAL RIWAYAT LAPORAN -->
-<div class="modal-overlay" id="modal-history">
-  <div class="modal-box" style="max-width: 600px;">
-    <button class="modal-close" onclick="closeModal('history')">×</button>
-    <div class="modal-title">Riwayat Saya</div>
-    <p style="color:var(--neutral-500); font-size:var(--text-sm); margin-bottom:var(--space-6);">Daftar seluruh laporan yang pernah Anda buat.</p>
-    
-    <div id="history-container" style="display:flex; flex-direction:column; gap:var(--space-4); max-height:400px; overflow-y:auto; padding-right:8px;">
-        <div style="text-align:center; padding:var(--space-8); color:var(--neutral-400);">Memuat data...</div>
-    </div>
-  </div>
-</div>
 
 <div class="modal-overlay" id="modal" onclick="handleOverlayClick(event)" aria-modal="true" role="dialog" aria-hidden="true">
   <div class="modal-box">

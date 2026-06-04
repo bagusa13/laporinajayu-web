@@ -1,0 +1,17 @@
+{
+  "name": "LaporinAja",
+  "short_name": "LaporinAja",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#E53E3E",
+  "description": "Platform pelaporan fasilitas kampus Telkom University.",
+  "icons": [
+    {
+      "src": "og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

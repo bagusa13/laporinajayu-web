@@ -21,6 +21,21 @@ import {
     updateDoc
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
+
+// ==========================================
+//   OFFLINE / ONLINE DETECTION
+// ==========================================
+window.addEventListener('offline', () => {
+    showToast('Koneksi terputus! Anda sedang offline.', 'error');
+    const btn = document.getElementById('btn-submit-laporan');
+    if (btn) { btn.disabled = true; btn.innerText = 'Menunggu Koneksi...'; }
+});
+window.addEventListener('online', () => {
+    showToast('Koneksi kembali pulih.', 'success');
+    const btn = document.getElementById('btn-submit-laporan');
+    if (btn) { btn.disabled = false; btn.innerText = 'Kirim Laporan'; }
+});
+
 // ============================================================
 //   STATE
 // ============================================================

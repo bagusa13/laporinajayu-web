@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#E53E3E">
   <meta name="description" content="Platform pelaporan fasilitas kampus Telkom University yang cepat, transparan, dan mudah digunakan.">
   
   <meta name="description" content="Laporin Aja - Platform pelaporan kerusakan fasilitas Telkom University yang responsif dan modern.">
@@ -631,5 +633,16 @@ function togglePassword(btn) {
 </script>
   <!-- Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').then(reg => {
+          console.log('SW registered: ', reg.scope);
+        }).catch(err => console.log('SW registration failed: ', err));
+      });
+    }
+  </script>
+
 </body>
 </html>

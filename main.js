@@ -902,3 +902,15 @@ window.copyTicketId = function() {
         showToast("Gagal menyalin tiket.", "error");
     });
 };
+
+
+// Preloader Logic
+window.addEventListener('load', () => {
+    const preloader = document.getElementById('page-preloader');
+    if (preloader) {
+        // Add a slight delay for aesthetic purposes so the bar animation finishes
+        setTimeout(() => {
+            preloader.classList.add('fade-out');
+        }, 500);
+    }
+});

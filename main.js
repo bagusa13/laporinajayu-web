@@ -95,6 +95,79 @@ function initDarkMode() {
 document.addEventListener('DOMContentLoaded', initDarkMode);
 
 // ============================================================
+//   USER HISTORY & UTILS
+// ============================================================
+window.fetchUserHistory = async function() {
+    if (!currentUser) return;
+    const container = document.getElementById('history-container');
+    container.innerHTML = '<div style="text-align:center; padding:var(--space-8); color:var(--neutral-400);">Memuat data...</div>';
+    
+    try {
+        const q = query(collection(db, "reports"), where("reporterInfo.email", "==", currentUser.email));
+        const snap = await getDocs(q);
+        if (snap.empty) {
+            container.innerHTML = '<div style="text-align:center; padding:var(--space-8); color:var(--neutral-400);">Belum ada laporan yang Anda buat.</div>';
+            return;
+        }
+        let html = '';
+        snap.forEach(docSnap => {
+            const d = docSnap.data();
+            let statusColor, statusBg, statusIcon;
+            switch (d.status) {
+                case 'Selesai': statusColor = '#15803d'; statusBg = '#f0fdf4'; statusIcon = '✅'; break;
+                case 'Diproses': statusColor = '#b45309'; statusBg = '#fffbeb'; statusIcon = '🔧'; break;
+                default: statusColor = '#b91c1c'; statusBg = '#fff1f1'; statusIcon = '⏳';
+            }
+            html += `
+                <div style="border:1px solid var(--neutral-200); padding:16px; border-radius:12px; display:flex; justify-content:space-between; align-items:center; background:var(--neutral-50);">
+                    <div>
+                        <div style="font-weight:bold; font-size:14px; margin-bottom:4px;">${d.reportId}</div>
+                        <div style="font-size:12px; color:var(--neutral-500);">${d.content.category} - ${d.content.location}</div>
+                    </div>
+                    <div style="background:${statusBg}; color:${statusColor}; padding:4px 10px; border-radius:12px; font-size:12px; font-weight:bold;">${statusIcon} ${d.status}</div>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+    } catch (e) {
+        console.error("Fetch history error:", e);
+        container.innerHTML = '<div style="text-align:center; padding:var(--space-8); color:var(--color-danger);">Gagal memuat riwayat.</div>';
+    }
+};
+
+function compressImage(file, quality = 0.7, maxWidth = 1200, maxHeight = 1200) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = event => {
+            const img = new Image();
+            img.src = event.target.result;
+            img.onload = () => {
+                let width = img.width;
+                let height = img.height;
+                if (width > height && width > maxWidth) {
+                    height = Math.round((height *= maxWidth / width));
+                    width = maxWidth;
+                } else if (height > maxHeight) {
+                    width = Math.round((width *= maxHeight / height));
+                    height = maxHeight;
+                }
+                const canvas = document.createElement('canvas');
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+                canvas.toBlob(blob => {
+                    resolve(new File([blob], file.name, { type: 'image/jpeg', lastModified: Date.now() }));
+                }, 'image/jpeg', quality);
+            };
+            img.onerror = error => reject(error);
+        };
+        reader.onerror = error => reject(error);
+    });
+}
+
+// ============================================================
 //   HAMBURGER
 // ============================================================
 const hamburger = document.getElementById('hamburger');
@@ -353,13 +426,14 @@ function triggerUpdateAnim(element) {
 // ============================================================
 onAuthStateChanged(auth, (user) => {
     currentUser = user;
-    const deskNav = document.getElementById('auth-nav-actions');
-    const mobNav = document.getElementById('mobile-auth-actions');
+    const deskNav = document.getElementById('desktop-auth-container');
+    const mobNav = document.getElementById('mobile-auth-container');
 
     if (user) {
         const displayName = user.displayName || 'User';
         const loggedInHtml = `
             <span style="font-size:13px; font-weight:bold; margin-right:8px; color: var(--neutral-700);">Hi, ${displayName.split(' ')[0]}! 👋</span>
+            <button class="btn btn-ghost btn-sm" onclick="openModal('history')">Riwayat Saya</button>
             <button class="btn btn-primary btn-sm" onclick="openModal('lapor')">Buat Laporan</button>
             <button class="btn btn-ghost btn-sm btn-logout" style="border-color:var(--color-danger); color:var(--color-danger)">Keluar</button>
         `;
@@ -550,15 +624,20 @@ document.getElementById('btn-submit-laporan').addEventListener('click', async ()
     try {
         let imgUrl = "";
         if (fileInput) {
+            setLoadingState('btn-submit-laporan', true, "Mengompresi Gambar...");
+            const compressedFile = await compressImage(fileInput);
+            
+            setLoadingState('btn-submit-laporan', true, "Mengunggah Gambar...");
             const cloudName = "dyfc0i8y5";
             const uploadPreset = "PictLaporin";
             const formData = new FormData();
-            formData.append('file', fileInput);
+            formData.append('file', compressedFile);
             formData.append('upload_preset', uploadPreset);
             const cloudResp = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, { method: 'POST', body: formData });
             const cloudData = await cloudResp.json();
             if (cloudData.error) throw new Error(`Upload foto gagal: ${cloudData.error.message}`);
             imgUrl = cloudData.secure_url;
+            setLoadingState('btn-submit-laporan', true, "Menyimpan Data...");
         }
 
         const ticketId = generateTicketId();

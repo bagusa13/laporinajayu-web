@@ -67,6 +67,9 @@ document.getElementById('a-logout').onclick = () => signOut(auth);
 
 // ============================================================
 //   MANAJEMEN DATA REAL-TIME
+let currentReportsData = [];
+let categoryChartInstance = null;
+
 // ============================================================
 function initAdminDashboard() {
     const q = query(collection(db, "reports"), orderBy("metadata.createdAt", "desc"));
@@ -75,8 +78,9 @@ function initAdminDashboard() {
         const body = document.getElementById('report-table-body');
         const emptyState = document.getElementById('admin-empty-state');
         body.innerHTML = "";
-
+        currentReportsData = [];
         let countTotal = 0, countProses = 0, countSelesai = 0, totalBiaya = 0;
+        const categoryCounts = {};
 
         if (snap.empty) {
             emptyState.style.display = 'block';
@@ -84,6 +88,8 @@ function initAdminDashboard() {
             emptyState.style.display = 'none';
             snap.forEach(d => {
                 const data = d.data();
+                currentReportsData.push(data);
+                categoryCounts[data.content.category] = (categoryCounts[data.content.category] || 0) + 1;
                 countTotal++;
                 if (data.status === "Diproses") countProses++;
                 if (data.status === "Selesai") countSelesai++;
@@ -169,6 +175,23 @@ function initAdminDashboard() {
                 `;
                 body.appendChild(row);
             });
+
+            // Update Chart
+            const ctx = document.getElementById('categoryChart').getContext('2d');
+            const labels = Object.keys(categoryCounts);
+            const values = Object.values(categoryCounts);
+            if (categoryChartInstance) categoryChartInstance.destroy();
+            categoryChartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: values,
+                        backgroundColor: ['#ef4444', '#f97316', '#eab308', '#22c55e', '#3b82f6', '#8b5cf6', '#ec4899', '#64748b']
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
         }
 
         // Update stat cards
@@ -208,3 +231,38 @@ function initAdminDashboard() {
         if (filterVal) window.filterTable?.();
     });
 }
+
+// ============================================================
+//   EXPORT CSV
+// ============================================================
+window.exportToCSV = function() {
+    if (currentReportsData.length === 0) {
+        showToast("Tidak ada data untuk di-export", "error");
+        return;
+    }
+    const headers = ["Tiket", "Nama Pelapor", "Email", "Kategori", "Lokasi", "Deskripsi", "Status", "Estimasi Biaya", "Waktu Dibuat"];
+    const rows = currentReportsData.map(d => {
+        let tgl = '';
+        if (d.metadata?.createdAt?.toDate) tgl = d.metadata.createdAt.toDate().toISOString();
+        return [
+            d.reportId,
+            `"${d.reporterInfo.name}"`,
+            `"${d.reporterInfo.email}"`,
+            `"${d.content.category}"`,
+            `"${d.content.location}"`,
+            `"${d.content.description.replace(/\n/g, ' ')}"`,
+            d.status,
+            d.estimasiBiaya || 0,
+            tgl
+        ].join(",");
+    });
+    
+    const csvContent = "data:text/csv;charset=utf-8," + [headers.join(","), ...rows].join("\n");
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", `laporan_kampus_${new Date().toISOString().slice(0,10)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+};

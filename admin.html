@@ -105,6 +105,13 @@
             </div>
         </div>
 
+        <div class="admin-table-area" style="margin-bottom: 32px; padding: 24px;">
+            <h3 style="margin-bottom:16px;">Analitik Kategori Laporan</h3>
+            <div style="height: 300px; display: flex; justify-content: center;">
+                <canvas id="categoryChart"></canvas>
+            </div>
+        </div>
+
         <div class="admin-table-area" id="admin-table-area">
             <div class="table-header">
                 <h3>Daftar Antrean Laporan</h3>
@@ -115,6 +122,7 @@
                         <option value="Diproses">Diproses</option>
                         <option value="Selesai">Selesai</option>
                     </select>
+                    <button class="btn btn-ghost btn-sm" onclick="exportToCSV()" style="border-color:#10b981; color:#059669;">📥 Export CSV</button>
                     <button class="btn btn-ghost btn-sm" onclick="location.reload()">Refresh Data</button>
                 </div>
             </div>
@@ -143,6 +151,7 @@
     </main>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="module" src="admin-logic.js"></script>
 <script>
 function scrollToSection(id) {

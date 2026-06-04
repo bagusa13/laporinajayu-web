@@ -735,3 +735,37 @@ footer { background: var(--neutral-950); color: var(--neutral-400); padding: var
 .stat-label { font-size: var(--text-xs); color: var(--neutral-500); font-weight: var(--weight-bold); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 8px; }
 .stat-info h2 { font-size: 32px; font-weight: var(--weight-extrabold); color: var(--neutral-900); letter-spacing: -0.04em; line-height: 1; }
 .admin-table-area { background: white; border-radius: var(--radius-3xl); border: 1px solid var(--neutral-150); overflow: hidden; box-shadow: var(--shadow-sm); }
+
+/* ADMIN TABLE STYLES */
+.table-header { padding: 24px; border-bottom: 1px solid var(--neutral-150); display: flex; justify-content: space-between; align-items: center; }
+.table-header h3 { font-size: var(--text-lg); font-weight: var(--weight-extrabold); color: var(--neutral-900); }
+.table-responsive { width: 100%; overflow-x: auto; }
+.modern-table { width: 100%; border-collapse: collapse; text-align: left; }
+.modern-table th { padding: 16px 24px; background: var(--neutral-50); font-size: 12px; font-weight: var(--weight-bold); color: var(--neutral-500); text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--neutral-150); white-space: nowrap; }
+.modern-table td { padding: 20px 24px; border-bottom: 1px solid var(--neutral-100); vertical-align: top; }
+.modern-table tr:last-child td { border-bottom: none; }
+.modern-table tr:hover td { background: rgba(244,244,245,0.4); }
+
+.td-ticket strong { font-family: var(--font-mono); font-size: 13px; color: var(--neutral-800); }
+.anon-row-badge { background: #f1f5f9; color: #475569; font-size: 10px; padding: 3px 8px; border-radius: 4px; font-weight: var(--weight-bold); display: inline-block; }
+.td-user span { display: block; font-size: 14px; font-weight: var(--weight-bold); color: var(--neutral-900); margin-bottom: 2px; }
+.td-user small { color: var(--neutral-500); font-size: 12px; }
+.td-desc p { font-size: 13px; color: var(--neutral-600); line-height: 1.5; margin-top: 6px; }
+.cat-badge { background: var(--red-50); color: var(--red-600); font-size: 11px; padding: 4px 8px; border-radius: 6px; font-weight: var(--weight-bold); border: 1px solid var(--red-100); display: inline-block; }
+
+.view-img { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: #2563eb; font-weight: var(--weight-bold); background: #eff6ff; padding: 6px 10px; border-radius: 6px; transition: all var(--t-fast); text-decoration: none; border: 1px solid #bfdbfe; }
+.view-img:hover { background: #2563eb; color: white; }
+.no-img { font-size: 12px; color: var(--neutral-400); font-style: italic; }
+
+.biaya-input-wrap { display: flex; flex-direction: column; gap: 6px; }
+.biaya-filled { font-size: 14px; font-weight: var(--weight-bold); color: #16a34a; }
+.biaya-empty { font-size: 12px; font-style: italic; color: var(--neutral-400); }
+.biaya-input { padding: 8px 12px; border: 1px solid var(--neutral-200); border-radius: 8px; font-family: var(--font-primary); font-size: 13px; width: 130px; outline: none; transition: border-color var(--t-fast); }
+.biaya-input:focus { border-color: var(--red-400); }
+
+.status-dropdown { padding: 8px 12px; border: 1px solid var(--neutral-200); border-radius: 8px; font-family: var(--font-primary); font-size: 13px; font-weight: var(--weight-bold); color: var(--neutral-700); background: white; outline: none; cursor: pointer; transition: all var(--t-fast); appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 8px center; background-size: 14px; padding-right: 28px; }
+.status-dropdown:focus { border-color: var(--red-400); box-shadow: 0 0 0 3px rgba(229,62,62,0.1); }
+
+.btn-save { padding: 8px 16px; background: var(--neutral-900); color: white; border: none; border-radius: 8px; font-family: var(--font-primary); font-size: 12px; font-weight: var(--weight-bold); cursor: pointer; transition: all var(--t-fast); }
+.btn-save:hover { background: var(--red-600); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+.btn-save:active { transform: translateY(0); }

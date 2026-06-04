@@ -1,9 +1,8 @@
 /* ============================================================
    LAPORINAJA — DESIGN SYSTEM v4.0 (Anti-Gravity)
    Telkom University · Red Identity
+   Font loaded via <link> in HTML for faster rendering
 ============================================================ */
-
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,400;0,500&display=swap');
 
 :root {
   --red-50:  #fff1f1;
@@ -106,9 +105,6 @@
   --t-normal: 300ms var(--ease-out);
   --t-slow:   500ms var(--ease-out);
 }
-
-
-
 /* FEEDBACK & RATING */
 .feedback-box { margin-top: var(--space-6); padding-top: var(--space-4); border-top: 1px dashed var(--neutral-150); }
 .feedback-title { font-size: var(--text-sm); font-weight: var(--weight-bold); color: var(--neutral-800); margin-bottom: var(--space-3); }

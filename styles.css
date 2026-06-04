@@ -338,8 +338,8 @@ button { font-family: var(--font-primary); outline: none; }
   50% { transform: translateY(-12px); box-shadow: 0 36px 64px rgba(0,0,0,0.15), 0 12px 24px rgba(0,0,0,0.08); }
 }
 @keyframes floatLevitateSmall {
-  0%, 100% { transform: translateY(0); box-shadow: var(--shadow-lg); }
-  50% { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
+  0%, 100% { transform: translateY(0); box-shadow: 0 12px 30px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04), inset 0 1px 1px rgba(var(--neutral-0-rgb), 1); }
+  50% { transform: translateY(-8px); box-shadow: 0 24px 48px rgba(0,0,0,0.12), 0 8px 24px rgba(0,0,0,0.06), inset 0 1px 1px rgba(var(--neutral-0-rgb), 1); }
 }
 
 .hero-visual { display: flex; justify-content: center; align-items: center; position: relative; }
@@ -349,6 +349,7 @@ button { font-family: var(--font-primary); outline: none; }
   border-radius: var(--radius-3xl); padding: var(--space-8);
   border: 1px solid rgba(var(--neutral-0-rgb),0.6); position: relative; z-index: 1;
   background-clip: padding-box;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08), 0 8px 16px rgba(0,0,0,0.04), inset 0 1px 1px rgba(255,255,255,0.8);
 }
 .report-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-6); padding-bottom: var(--space-5); border-bottom: 1px solid var(--neutral-100); }
 .report-card-title { font-size: var(--text-base); font-weight: var(--weight-extrabold); color: var(--neutral-900); letter-spacing: -0.02em; }
@@ -371,6 +372,7 @@ button { font-family: var(--font-primary); outline: none; }
   border-radius: var(--radius-2xl); padding: 12px 18px;
   border: 1px solid rgba(var(--neutral-0-rgb),0.8); display: flex; align-items: center; gap: var(--space-3);
   animation: floatLevitateSmall 5s ease-in-out infinite 0.5s; min-width: 220px; z-index: 3;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08), inset 0 1px 1px rgba(var(--neutral-0-rgb), 1);
 }
 .notif-icon { width: 40px; height: 40px; background: var(--color-success-bg); border-radius: var(--radius-xl); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; box-shadow: 0 4px 12px rgba(22,163,74,0.15); }
 .notif-text-title { font-size: var(--text-sm); font-weight: var(--weight-extrabold); color: var(--neutral-900); }
@@ -382,6 +384,7 @@ button { font-family: var(--font-primary); outline: none; }
   border-radius: var(--radius-2xl); padding: 16px 20px;
   border: 1px solid rgba(var(--neutral-0-rgb),0.8);
   animation: floatLevitateSmall 5.5s ease-in-out infinite 1s; z-index: 3; min-width: 180px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08), inset 0 1px 1px rgba(var(--neutral-0-rgb), 1);
 }
 .tracker-title { font-size: var(--text-sm); font-weight: var(--weight-extrabold); color: var(--neutral-800); margin-bottom: var(--space-4); letter-spacing: 0.01em; }
 .tracker-steps { display: flex; flex-direction: column; gap: var(--space-3); }

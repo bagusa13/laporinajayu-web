@@ -905,3 +905,92 @@ footer { background: var(--neutral-950); color: var(--neutral-400); padding: var
 .btn-save { padding: 8px 16px; background: var(--neutral-900); color: white; border: none; border-radius: 8px; font-family: var(--font-primary); font-size: 12px; font-weight: var(--weight-bold); cursor: pointer; transition: all var(--t-fast); }
 .btn-save:hover { background: var(--red-600); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
 .btn-save:active { transform: translateY(0); }
+
+
+/* ==========================================================================
+   PREMIUM MICRO-INTERACTIONS
+   ========================================================================== */
+
+/* 1. Cinematic Grain/Noise */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999998;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* 2. Scroll Progress Bar */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--red-600);
+  width: 0%;
+  z-index: 9999999;
+  box-shadow: 0 0 10px rgba(220,38,38,0.5);
+  transition: width 0.1s ease-out;
+}
+
+/* 3. Custom Cursor */
+@media (min-width: 1024px) {
+  body {
+    cursor: none;
+  }
+  a, button, input, select, textarea, .category-card-img, .logo {
+    cursor: none !important;
+  }
+  
+  .custom-cursor {
+    position: fixed;
+    top: 0; left: 0;
+    width: 8px; height: 8px;
+    background-color: var(--red-600);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 99999999;
+    transition: width 0.2s, height 0.2s, background-color 0.2s;
+  }
+  
+  .custom-cursor-follower {
+    position: fixed;
+    top: 0; left: 0;
+    width: 32px; height: 32px;
+    border: 1px solid rgba(220,38,38,0.5);
+    background-color: rgba(220,38,38,0.1);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 99999998;
+    transition: width 0.3s var(--ease-spring), height 0.3s var(--ease-spring), transform 0.1s;
+    backdrop-filter: blur(2px);
+  }
+  
+  /* Hover states for cursor */
+  body.cursor-hover .custom-cursor {
+    background-color: transparent;
+  }
+  body.cursor-hover .custom-cursor-follower {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(220,38,38,0.15);
+    border-color: rgba(220,38,38,0.3);
+  }
+  body.cursor-hidden .custom-cursor,
+  body.cursor-hidden .custom-cursor-follower {
+    opacity: 0;
+  }
+}
+
+/* 4. Magnetic Buttons */
+.magnetic {
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.magnetic span {
+  display: inline-block;
+  pointer-events: none;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}

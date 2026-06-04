@@ -971,13 +971,13 @@ footer { background: var(--neutral-950); color: var(--neutral-400); padding: var
   
   /* Hover states for cursor */
   body.cursor-hover .custom-cursor {
-    background-color: transparent;
+    transform: translate(-50%, -50%) scale(1.5);
+    background-color: white;
+    box-shadow: 0 0 0 2px var(--red-600);
   }
   body.cursor-hover .custom-cursor-follower {
-    width: 60px;
-    height: 60px;
-    background-color: rgba(220,38,38,0.15);
-    border-color: rgba(220,38,38,0.3);
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
   }
   body.cursor-hidden .custom-cursor,
   body.cursor-hidden .custom-cursor-follower {

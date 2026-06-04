@@ -107,6 +107,17 @@ function initAdminDashboard() {
                     ? `<span class="biaya-filled">${formatRupiah(data.estimasiBiaya)}</span>`
                     : `<span class="biaya-empty">Belum diisi</span>`;
 
+                // Ulasan display
+                let ulasanHtml = `<span style="color:var(--neutral-400); font-style:italic; font-size:12px;">Belum ada ulasan</span>`;
+                if (data.feedback) {
+                    let stars = '';
+                    for(let i=0; i<data.feedback.rating; i++) stars += '★';
+                    ulasanHtml = `
+                        <div style="color:#f59e0b; font-size:14px; letter-spacing:2px; margin-bottom:4px;">${stars}</div>
+                        <div style="font-size:12px; color:var(--neutral-700); line-height:1.4;">"${data.feedback.comment}"</div>
+                    `;
+                }
+
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td class="td-ticket">
@@ -148,6 +159,9 @@ function initAdminDashboard() {
                             <option value="Diproses" ${data.status === 'Diproses' ? 'selected' : ''}>🔧 Diproses</option>
                             <option value="Selesai" ${data.status === 'Selesai' ? 'selected' : ''}>✅ Selesai</option>
                         </select>
+                    </td>
+                    <td class="td-ulasan" style="min-width:180px;">
+                        ${ulasanHtml}
                     </td>
                     <td style="text-align: right;">
                         <button class="btn-save" data-id="${d.id}">Update</button>

@@ -16,7 +16,9 @@ import {
     where,
     getDocs,
     getCountFromServer,
-    onSnapshot
+    onSnapshot,
+    doc,
+    updateDoc
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 // ============================================================
@@ -29,10 +31,68 @@ const googleProvider = new GoogleAuthProvider();
 // ============================================================
 //   NAVBAR SCROLL
 // ============================================================
-const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 20);
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 20) navbar?.classList.add('scrolled');
+    else navbar?.classList.remove('scrolled');
 });
+
+// ============================================================
+//   FEEDBACK & RATING
+// ============================================================
+window.submitFeedback = async function(ticketId) {
+    const ratingEl = document.querySelector(`input[name="rating-${ticketId}"]:checked`);
+    const commentEl = document.getElementById(`comment-${ticketId}`);
+    if (!ratingEl) {
+        showToast("Pilih rating bintang terlebih dahulu!", "error");
+        return;
+    }
+    const rating = parseInt(ratingEl.value);
+    const comment = commentEl.value.trim();
+    if (!comment) {
+        showToast("Mohon isi komentar Anda.", "error");
+        return;
+    }
+
+    try {
+        const docRef = doc(db, "reports", ticketId);
+        await updateDoc(docRef, {
+            feedback: { rating, comment, createdAt: new Date() }
+        });
+        showToast("Terima kasih atas ulasan Anda!", "success");
+        window.handleTrack();
+    } catch (err) {
+        console.error("Feedback error:", err);
+        showToast("Gagal mengirim ulasan.", "error");
+    }
+};
+
+// ============================================================
+//   DARK MODE
+// ============================================================
+function initDarkMode() {
+    const isDark = localStorage.getItem('theme') === 'dark';
+    if (isDark) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    }
+    const toggleBtns = document.querySelectorAll('.theme-toggle');
+    toggleBtns.forEach(btn => {
+        btn.textContent = isDark ? '☀️' : '🌙';
+        btn.addEventListener('click', () => {
+            const current = document.documentElement.getAttribute('data-theme');
+            if (current === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                toggleBtns.forEach(b => b.textContent = '🌙');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                toggleBtns.forEach(b => b.textContent = '☀️');
+            }
+        });
+    });
+}
+document.addEventListener('DOMContentLoaded', initDarkMode);
 
 // ============================================================
 //   HAMBURGER
@@ -651,6 +711,37 @@ window.handleTrack = async function () {
                     `;
                 }
 
+                let feedbackHtml = '';
+                if (d.status === 'Selesai') {
+                    if (d.feedback) {
+                        let stars = '';
+                        for(let i=0; i<d.feedback.rating; i++) stars += '★';
+                        for(let i=d.feedback.rating; i<5; i++) stars += '☆';
+                        feedbackHtml = `
+                            <div class="feedback-readonly">
+                                <div style="font-size:12px; font-weight:bold; color:var(--neutral-500); margin-bottom:4px; text-transform:uppercase;">Ulasan Anda</div>
+                                <div class="feedback-readonly-stars">${stars}</div>
+                                <div style="font-size: 13px; color: var(--neutral-700); font-style: italic;">"${d.feedback.comment}"</div>
+                            </div>
+                        `;
+                    } else {
+                        feedbackHtml = `
+                            <div class="feedback-box">
+                                <div class="feedback-title">Beri Ulasan Perbaikan</div>
+                                <div class="star-rating">
+                                    <input type="radio" id="star5-${docSnap.id}" name="rating-${docSnap.id}" value="5"><label for="star5-${docSnap.id}">★</label>
+                                    <input type="radio" id="star4-${docSnap.id}" name="rating-${docSnap.id}" value="4"><label for="star4-${docSnap.id}">★</label>
+                                    <input type="radio" id="star3-${docSnap.id}" name="rating-${docSnap.id}" value="3"><label for="star3-${docSnap.id}">★</label>
+                                    <input type="radio" id="star2-${docSnap.id}" name="rating-${docSnap.id}" value="2"><label for="star2-${docSnap.id}">★</label>
+                                    <input type="radio" id="star1-${docSnap.id}" name="rating-${docSnap.id}" value="1"><label for="star1-${docSnap.id}">★</label>
+                                </div>
+                                <textarea id="comment-${docSnap.id}" class="form-input" placeholder="Tulis komentar atau masukan Anda..." rows="2" style="margin-bottom:8px;"></textarea>
+                                <button class="btn btn-primary btn-sm" onclick="submitFeedback('${docSnap.id}')" style="width:100%;">Kirim Ulasan</button>
+                            </div>
+                        `;
+                    }
+                }
+
                 const isAnon = d.reporterInfo?.isAnonymous;
                 resultEl.innerHTML += `
                     <div class="track-result-card">
@@ -703,6 +794,7 @@ window.handleTrack = async function () {
                                 <span>Selesai</span>
                             </div>
                         </div>
+                        ${feedbackHtml}
                     </div>
                 `;
             });

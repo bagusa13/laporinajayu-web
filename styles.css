@@ -105,6 +105,48 @@
   --t-slow:   500ms var(--ease-out);
 }
 
+[data-theme="dark"] {
+  --neutral-0:   #0e0e10;
+  --neutral-50:  #18181b;
+  --neutral-100: #27272a;
+  --neutral-150: #3f3f46;
+  --neutral-200: #52525b;
+  --neutral-300: #71717a;
+  --neutral-400: #a1a1aa;
+  --neutral-500: #d1d1d6;
+  --neutral-600: #e4e4e7;
+  --neutral-700: #ececee;
+  --neutral-800: #f4f4f5;
+  --neutral-900: #fafafa;
+  --neutral-950: #ffffff;
+  --color-success-bg: rgba(22, 163, 74, 0.15);
+  --color-success-border: rgba(22, 163, 74, 0.3);
+  --color-warning-bg: rgba(217, 119, 6, 0.15);
+  --color-warning-border: rgba(217, 119, 6, 0.3);
+  --color-danger-bg: rgba(220, 38, 38, 0.15);
+  --color-danger-border: rgba(220, 38, 38, 0.3);
+  --color-info-bg: rgba(37, 99, 235, 0.15);
+}
+
+/* FEEDBACK & RATING */
+.feedback-box { margin-top: var(--space-6); padding-top: var(--space-4); border-top: 1px dashed var(--neutral-150); }
+.feedback-title { font-size: var(--text-sm); font-weight: var(--weight-bold); color: var(--neutral-800); margin-bottom: var(--space-3); }
+.star-rating { display: flex; gap: 4px; flex-direction: row-reverse; justify-content: flex-end; margin-bottom: var(--space-3); }
+.star-rating input { display: none; }
+.star-rating label { font-size: 28px; color: var(--neutral-200); cursor: pointer; transition: color var(--t-fast); line-height: 1; }
+.star-rating label:hover, .star-rating label:hover ~ label, .star-rating input:checked ~ label { color: #f59e0b; }
+.feedback-readonly { background: var(--color-warning-bg); border: 1px solid var(--color-warning-border); border-radius: var(--radius-xl); padding: var(--space-4); margin-top: var(--space-4); }
+.feedback-readonly-stars { color: #f59e0b; font-size: 16px; margin-bottom: 6px; letter-spacing: 2px; display: flex; gap: 2px; }
+
+/* DARK MODE TOGGLE */
+.theme-toggle {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--neutral-50); border: 1px solid var(--neutral-200);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all var(--t-fast); color: var(--neutral-500); font-size: 18px;
+}
+.theme-toggle:hover { background: var(--neutral-100); color: var(--neutral-900); transform: scale(1.05); }
+
 /* BASE RESET */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }

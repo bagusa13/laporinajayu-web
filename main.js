@@ -62,8 +62,7 @@ window.submitFeedback = async function(ticketId) {
         showToast("Terima kasih atas ulasan Anda!", "success");
         window.handleTrack();
     } catch (err) {
-        console.error("Feedback error:", err);
-        showToast("Gagal mengirim ulasan.", "error");
+showToast("Gagal mengirim ulasan.", "error");
     }
 };
 
@@ -346,8 +345,7 @@ function initRealtimeStats() {
             triggerUpdateAnim(elPctBottom);
         }
     }, (error) => {
-        console.warn("Gagal memuat stats real-time:", error.message);
-    });
+});
 }
 
 function triggerUpdateAnim(element) {
@@ -405,8 +403,7 @@ async function handleGoogleLogin(e) {
         showToast(`Selamat datang, ${result.user.displayName}!`);
         window.closeModal();
     } catch (error) {
-        console.error("Google Auth Error:", error);
-        // Abaikan jika user menutup popup secara manual atau double click (cancelled)
+// Abaikan jika user menutup popup secara manual atau double click (cancelled)
         if (error.code !== 'auth/popup-closed-by-user' && error.code !== 'auth/cancelled-popup-request') {
             showToast(`Gagal: ${error.message}`, "error");
         }
@@ -621,8 +618,7 @@ document.getElementById('btn-submit-laporan').addEventListener('click', async ()
             btnSubmit.innerHTML = originalBtnContent;
         }, 1500);
     } catch (err) {
-        console.error("Submit laporan error:", err);
-        showToast(err.message || "Gagal mengirim laporan. Coba lagi.", "error");
+showToast(err.message || "Gagal mengirim laporan. Coba lagi.", "error");
         btnSubmit.innerHTML = originalBtnContent;
     } finally {
         setLoadingState('btn-submit-laporan', false);
@@ -815,8 +811,7 @@ window.handleTrack = async function () {
         }
     } catch (e) {
         showToast("Gagal mengambil data dari server.", "error");
-        console.error("Track error:", e);
-    } finally {
+} finally {
         setLoadingState('btn-track', false);
     }
 };

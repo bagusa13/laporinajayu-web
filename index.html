@@ -205,14 +205,14 @@
       <h2 class="section-title">Semua jenis fasilitas<br>kampus tercakup.</h2>
     </div>
     <div class="categories-grid">
-      <div class="category-card reveal-scale" onclick="openModal('lapor')"><div class="category-icon-wrap cat-blue">❄️</div><div class="category-name">AC & Pendingin</div><div class="category-count">Paling sering dilaporkan</div></div>
-      <div class="category-card reveal-scale delay-1" onclick="openModal('lapor')"><div class="category-icon-wrap cat-teal">⚡</div><div class="category-name">Listrik & Lampu</div><div class="category-count">Prioritas Tinggi</div></div>
-      <div class="category-card reveal-scale delay-2" onclick="openModal('lapor')"><div class="category-icon-wrap cat-green">🚿</div><div class="category-name">Sanitasi & Toilet</div><div class="category-count">Respons cepat</div></div>
-      <div class="category-card reveal-scale delay-3" onclick="openModal('lapor')"><div class="category-icon-wrap cat-yellow">📽️</div><div class="category-name">Proyektor & AV</div><div class="category-count">Jadwal fleksibel</div></div>
-      <div class="category-card reveal-scale" onclick="openModal('lapor')"><div class="category-icon-wrap cat-red">🪑</div><div class="category-name">Furnitur & Kursi</div><div class="category-count">Pergantian & perbaikan</div></div>
-      <div class="category-card reveal-scale delay-1" onclick="openModal('lapor')"><div class="category-icon-wrap cat-purple">🚪</div><div class="category-name">Pintu & Jendela</div><div class="category-count">Keamanan & kenyamanan</div></div>
-      <div class="category-card reveal-scale delay-2" onclick="openModal('lapor')"><div class="category-icon-wrap cat-orange">🏗️</div><div class="category-name">Infrastruktur</div><div class="category-count">Bangunan & struktur</div></div>
-      <div class="category-card reveal-scale delay-3" onclick="openModal('lapor')"><div class="category-icon-wrap cat-gray">📋</div><div class="category-name">Lainnya</div><div class="category-count">Masalah lain</div></div>
+      <div class="category-card reveal-scale" role="button" tabindex="0" aria-label="Laporkan kerusakan" onclick="openModal('lapor')"><div class="category-icon-wrap cat-blue">❄️</div><div class="category-name">AC & Pendingin</div><div class="category-count">Paling sering dilaporkan</div></div>
+      <div class="category-card reveal-scale delay-1" role="button" tabindex="0" aria-label="Laporkan kerusakan" onclick="openModal('lapor')"><div class="category-icon-wrap cat-teal">⚡</div><div class="category-name">Listrik & Lampu</div><div class="category-count">Prioritas Tinggi</div></div>
+      <div class="category-card reveal-scale delay-2" role="button" tabindex="0" aria-label="Laporkan kerusakan" onclick="openModal('lapor')"><div class="category-icon-wrap cat-green">🚿</div><div class="category-name">Sanitasi & Toilet</div><div class="category-count">Respons cepat</div></div>
+      <div class="category-card reveal-scale delay-3" role="button" tabindex="0" aria-label="Laporkan kerusakan" onclick="openModal('lapor')"><div class="category-icon-wrap cat-yellow">📽️</div><div class="category-name">Proyektor & AV</div><div class="category-count">Jadwal fleksibel</div></div>
+      <div class="category-card reveal-scale" role="button" tabindex="0" aria-label="Laporkan kerusakan" onclick="openModal('lapor')"><div class="category-icon-wrap cat-red">🪑</div><div class="category-name">Furnitur & Kursi</div><div class="category-count">Pergantian & perbaikan</div></div>
+      <div class="category-card reveal-scale delay-1" role="button" tabindex="0" aria-label="Laporkan kerusakan" onclick="openModal('lapor')"><div class="category-icon-wrap cat-purple">🚪</div><div class="category-name">Pintu & Jendela</div><div class="category-count">Keamanan & kenyamanan</div></div>
+      <div class="category-card reveal-scale delay-2" role="button" tabindex="0" aria-label="Laporkan kerusakan" onclick="openModal('lapor')"><div class="category-icon-wrap cat-orange">🏗️</div><div class="category-name">Infrastruktur</div><div class="category-count">Bangunan & struktur</div></div>
+      <div class="category-card reveal-scale delay-3" role="button" tabindex="0" aria-label="Laporkan kerusakan" onclick="openModal('lapor')"><div class="category-icon-wrap cat-gray">📋</div><div class="category-name">Lainnya</div><div class="category-count">Masalah lain</div></div>
     </div>
   </div>
 </section>
@@ -359,7 +359,7 @@
 
 <div class="modal-overlay" id="modal" onclick="handleOverlayClick(event)" aria-modal="true" role="dialog" aria-hidden="true">
   <div class="modal-box">
-    <button class="modal-close" onclick="closeModal()" aria-label="Tutup modal">✕</button>
+    <button class="modal-close" onclick="closeModal()" aria-label="Tutup modal" aria-label="Tutup modal">✕</button>
     <div class="modal-logo">
       <svg width="36" height="36" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="40" height="40" rx="10" fill="url(#mLogo)"/>
@@ -379,15 +379,15 @@
       <div id="form-masuk">
         <div class="form-group-floating">
           <input type="email" class="form-input-floating" id="masuk-email" placeholder=" " autocomplete="email">
-          <label class="form-label-floating">Email</label>
+          <label class="form-label-floating" for="masuk-email">Email</label>
         </div>
         <div class="form-group-floating">
           <input type="password" class="form-input-floating" id="masuk-password" placeholder=" " autocomplete="current-password">
-          <label class="form-label-floating">Password</label>
+          <label class="form-label-floating" for="masuk-password">Password</label>
         </div>
-        <button class="btn btn-primary btn-md" id="btn-masuk" style="width:100%; justify-content:center; margin-top: var(--space-4);">Masuk ke Akun</button>
+        <button class="btn btn-primary btn-md" id="btn-masuk" class="btn-submit-full">Masuk ke Akun</button>
         <div class="divider">atau</div>
-        <button type="button" class="btn btn-ghost btn-md" id="btn-google-login" style="width:100%; justify-content:center;">
+        <button type="button" class="btn btn-ghost btn-md" id="btn-google-login" class="btn-full-width">
           <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
           Masuk dengan Google
         </button>
@@ -396,23 +396,23 @@
       <div id="form-daftar" style="display:none;">
         <div class="form-group-floating">
           <input type="text" class="form-input-floating" id="daftar-nama" placeholder=" " autocomplete="name">
-          <label class="form-label-floating">Nama Lengkap</label>
+          <label class="form-label-floating" for="daftar-nama">Nama Lengkap</label>
         </div>
         <div class="form-group-floating">
           <input type="email" class="form-input-floating" id="daftar-email" placeholder=" " autocomplete="email">
-          <label class="form-label-floating">Email</label>
+          <label class="form-label-floating" for="daftar-email">Email</label>
         </div>
         <div class="form-group-floating">
           <input type="password" class="form-input-floating" id="daftar-password" placeholder=" " autocomplete="new-password">
-          <label class="form-label-floating">Password (min. 8 karakter)</label>
+          <label class="form-label-floating" for="daftar-password">Password (min. 8 karakter)</label>
         </div>
         <div class="form-group-floating">
           <input type="password" class="form-input-floating" id="daftar-konfirmasi" placeholder=" " autocomplete="new-password">
-          <label class="form-label-floating">Konfirmasi Password</label>
+          <label class="form-label-floating" for="daftar-konfirmasi">Konfirmasi Password</label>
         </div>
-        <button class="btn btn-primary btn-md" id="btn-daftar" style="width:100%; justify-content:center; margin-top: var(--space-4);">Buat Akun</button>
+        <button class="btn btn-primary btn-md" id="btn-daftar" class="btn-submit-full">Buat Akun</button>
         <div class="divider">atau</div>
-        <button type="button" class="btn btn-ghost btn-md" id="btn-google-reg" style="width:100%; justify-content:center;">
+        <button type="button" class="btn btn-ghost btn-md" id="btn-google-reg" class="btn-full-width">
           <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
           Daftar dengan Google
         </button>
@@ -432,18 +432,18 @@
       </div>
 
       <div id="lapor-logged-info" style="display:none; margin-bottom: var(--space-6);">
-        <div class="reporter-chip" style="display: flex; align-items: center; gap: 12px; background: var(--neutral-50); padding: 12px 16px; border-radius: var(--radius-xl); border: 1px solid var(--neutral-200);">
-          <div class="reporter-chip-avatar" id="lapor-chip-avatar" style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--red-500), #f97316); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 16px;">U</div>
+        <div class="reporter-chip">
+          <div class="reporter-chip-avatar" id="lapor-chip-avatar">U</div>
           <div style="flex: 1;">
             <div id="lapor-chip-name" style="font-size:var(--text-base);font-weight:var(--weight-bold);color:var(--neutral-900);"></div>
             <div id="lapor-chip-email" style="font-size:var(--text-xs);color:var(--neutral-500);"></div>
           </div>
-          <span class="reporter-chip-badge" style="background: var(--color-success-bg); color: #14532d; font-size: 10px; font-weight: bold; padding: 4px 8px; border-radius: 100px; border: 1px solid var(--color-success-border);">Terverifikasi ✓</span>
+          <span class="reporter-chip-badge">Terverifikasi ✓</span>
         </div>
       </div>
 
       <div id="form-anon-fields" style="display:none;">
-        <div class="anon-info-notice" style="display: flex; gap: 12px; background: #fffbeb; padding: 12px 16px; border-radius: var(--radius-xl); border: 1px solid #fde68a; margin-bottom: var(--space-5);">
+        <div class="anon-info-notice">
           <span style="font-size: 20px;">👤</span>
           <div>
             <strong style="font-size: var(--text-sm); color: #92400e;">Mode Anonim</strong><br>
@@ -452,17 +452,17 @@
         </div>
         <div class="form-group-floating">
           <input type="text" class="form-input-floating" id="anon-nama" placeholder=" ">
-          <label class="form-label-floating">Nama Kamu *</label>
+          <label class="form-label-floating" for="anon-nama">Nama Kamu *</label>
         </div>
         <div class="form-group-floating">
           <input type="email" class="form-input-floating" id="anon-email" placeholder=" ">
-          <label class="form-label-floating">Email (Opsional untuk cek status)</label>
+          <label class="form-label-floating" for="anon-email">Email (Opsional untuk cek status)</label>
         </div>
       </div>
 
       <div class="form-group">
         <label class="form-label">Kategori Kerusakan *</label>
-        <select class="form-input" id="lapor-kategori" style="padding: 16px;">
+        <select class="form-input" id="lapor-kategori" aria-label="Pilih kategori kerusakan">
           <option value="" disabled selected>Pilih jenis fasilitas...</option>
           <option value="AC & Pendingin">❄️ AC & Pendingin</option>
           <option value="Listrik & Lampu">⚡ Listrik & Lampu</option>
@@ -476,22 +476,22 @@
       </div>
       <div class="form-group-floating">
         <input type="text" class="form-input-floating" id="lapor-lokasi" placeholder=" ">
-        <label class="form-label-floating">Lokasi</label>
+        <label class="form-label-floating" for="lapor-lokasi">Lokasi</label>
       </div>
       <div class="form-group-floating">
         <textarea class="form-input-floating" id="lapor-deskripsi" rows="3" placeholder=" " style="resize:vertical;"></textarea>
-        <label class="form-label-floating">Deskripsi Kendala *</label>
+        <label class="form-label-floating" for="lapor-deskripsi">Deskripsi Kendala *</label>
       </div>
       <div class="form-group">
         <label class="form-label">Lampirkan Foto <span style="color: var(--neutral-400); font-weight: 400;">(Opsional · Max 5MB · JPG/PNG)</span></label>
         <input type="file" class="form-input" id="lapor-foto" accept="image/jpeg,image/png,image/webp,image/gif" style="padding: 12px; background: var(--neutral-0);">
         
-        <div id="preview-container" style="display: none; margin-top: 16px; position: relative; width: fit-content;">
-            <img id="foto-preview" src="" alt="Preview" style="max-width: 100%; height: 160px; object-fit: cover; border-radius: var(--radius-lg); border: 2px solid var(--neutral-200); box-shadow: var(--shadow-md);">
-            <button id="hapus-foto" type="button" style="position: absolute; top: -12px; right: -12px; background: var(--color-danger); color: white; border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; box-shadow: 0 4px 12px rgba(220,38,38,0.4); transition: transform var(--t-fast);">✕</button>
+        <div id="preview-container" class="preview-container">
+            <img id="foto-preview" src="" alt="Preview foto kerusakan" class="foto-preview">
+            <button id="hapus-foto" type="button" aria-label="Hapus foto" class="btn-hapus-foto">✕</button>
         </div>
       </div>
-      <button class="btn btn-primary btn-md" id="btn-submit-laporan" style="width:100%; justify-content:center; margin-top: var(--space-4); padding: 16px;">
+      <button class="btn btn-primary btn-md" id="btn-submit-laporan" class="btn-submit-full">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
         Kirim Laporan Kerusakan
       </button>

@@ -971,10 +971,10 @@ footer { background: var(--neutral-950); color: var(--neutral-400); padding: var
 
 /* 3. Custom Cursor */
 @media (min-width: 1024px) {
-  body {
+  body:not(.admin-body) {
     cursor: none;
   }
-  a, button, input, select, textarea, .category-card-img, .logo {
+  body:not(.admin-body) a, body:not(.admin-body) button, body:not(.admin-body) input, body:not(.admin-body) select, body:not(.admin-body) textarea, body:not(.admin-body) .category-card-img, body:not(.admin-body) .logo {
     cursor: none !important;
   }
   

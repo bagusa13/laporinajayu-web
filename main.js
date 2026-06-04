@@ -953,8 +953,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Smooth trailing for the follower
         function animateFollower() {
-            followerX += (mouseX - followerX) * 0.15; // smoothness factor
-            followerY += (mouseY - followerY) * 0.15;
+            followerX += (mouseX - followerX) * 0.45; // reduced delay
+            followerY += (mouseY - followerY) * 0.45;
             
             if(follower) {
                 follower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0) translate(-50%, -50%)`;
@@ -991,11 +991,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const y = e.clientY - rect.top;
                 
                 // Calculate pull (max 15px)
-                const pullX = (x - rect.width / 2) / (rect.width / 2) * 15;
-                const pullY = (y - rect.height / 2) / (rect.height / 2) * 15;
+                const pullX = (x - rect.width / 2) / (rect.width / 2) * 6;
+                const pullY = (y - rect.height / 2) / (rect.height / 2) * 6;
                 
                 btn.style.transform = `translate(${pullX}px, ${pullY}px)`;
-                if(text) text.style.transform = `translate(${pullX * 0.5}px, ${pullY * 0.5}px)`;
+                if(text) text.style.transform = `translate(${pullX * 0.3}px, ${pullY * 0.3}px)`;
             });
 
             btn.addEventListener('mouseleave', () => {

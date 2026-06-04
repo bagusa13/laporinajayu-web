@@ -598,6 +598,16 @@ document.getElementById('btn-submit-laporan').addEventListener('click', async ()
         document.getElementById('lapor-form-wrapper').style.display = 'none';
         document.getElementById('lapor-success-screen').style.display = 'block';
         document.getElementById('success-ticket-id').innerText = ticketId;
+
+            if (window.confetti) {
+                setTimeout(() => {
+                    confetti({
+                        particleCount: 120, spread: 80, origin: { y: 0.6 }, zIndex: 99999,
+                        colors: ['#E53E3E', '#F59E0B', '#10B981']
+                    });
+                }, 200);
+            }
+
             if(window.setFavicon) window.setFavicon('success');
         
         katEl.value = '';
@@ -951,6 +961,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
             });
         });
+
+    
+    // 6. Parallax Background
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        const heroBg = document.querySelector('.hero-grid-pattern');
+        if (heroBg) heroBg.style.transform = `translateY(${scrollY * 0.3}px)`;
+        
+        const blobs = document.querySelectorAll('.hero-blob-1, .hero-blob-2');
+        blobs.forEach((blob, idx) => {
+            blob.style.transform = `translateY(${scrollY * (0.15 + (idx * 0.1))}px)`;
+        });
+    });
 
     // Check if device supports hover (desktop)
     if (window.matchMedia("(min-width: 1024px) and (hover: hover)").matches) {

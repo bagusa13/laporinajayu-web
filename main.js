@@ -301,11 +301,11 @@ onAuthStateChanged(auth, (user) => {
         const loggedInHtml = `
             <span style="font-size:13px; font-weight:bold; margin-right:8px; color: var(--neutral-700);">Hi, ${displayName.split(' ')[0]}! 👋</span>
             <button class="btn btn-primary btn-sm" onclick="openModal('lapor')">Buat Laporan</button>
-            <button class="btn btn-ghost btn-sm" id="btn-logout" style="border-color:var(--color-danger); color:var(--color-danger)">Keluar</button>
+            <button class="btn btn-ghost btn-sm btn-logout" style="border-color:var(--color-danger); color:var(--color-danger)">Keluar</button>
         `;
         deskNav.innerHTML = loggedInHtml;
         mobNav.innerHTML = loggedInHtml.replace(/btn-sm/g, 'btn-md');
-        document.querySelectorAll('#btn-logout').forEach(btn => {
+        document.querySelectorAll('.btn-logout').forEach(btn => {
             btn.addEventListener('click', () => signOut(auth));
         });
     } else {
@@ -321,14 +321,20 @@ onAuthStateChanged(auth, (user) => {
 // ============================================================
 //   GOOGLE LOGIN
 // ============================================================
-async function handleGoogleLogin() {
+async function handleGoogleLogin(e) {
+    if (e) e.preventDefault();
+    if (window.location.protocol === 'file:') {
+        showToast("Google Login butuh web server (localhost/http). Jangan buka file HTML langsung.", "error");
+        return;
+    }
     try {
         const result = await signInWithPopup(auth, googleProvider);
         showToast(`Selamat datang, ${result.user.displayName}!`);
         window.closeModal();
     } catch (error) {
+        console.error("Google Auth Error:", error);
         if (error.code !== 'auth/popup-closed-by-user') {
-            showToast("Gagal masuk dengan Google.", "error");
+            showToast(`Gagal: ${error.message}`, "error");
         }
     }
 }

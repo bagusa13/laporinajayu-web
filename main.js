@@ -321,21 +321,29 @@ onAuthStateChanged(auth, (user) => {
 // ============================================================
 //   GOOGLE LOGIN
 // ============================================================
+let isGoogleLoginPending = false;
 async function handleGoogleLogin(e) {
     if (e) e.preventDefault();
+    if (isGoogleLoginPending) return; // Mencegah double click
+    
     if (window.location.protocol === 'file:') {
         showToast("Google Login butuh web server (localhost/http). Jangan buka file HTML langsung.", "error");
         return;
     }
+    
+    isGoogleLoginPending = true;
     try {
         const result = await signInWithPopup(auth, googleProvider);
         showToast(`Selamat datang, ${result.user.displayName}!`);
         window.closeModal();
     } catch (error) {
         console.error("Google Auth Error:", error);
-        if (error.code !== 'auth/popup-closed-by-user') {
+        // Abaikan jika user menutup popup secara manual atau double click (cancelled)
+        if (error.code !== 'auth/popup-closed-by-user' && error.code !== 'auth/cancelled-popup-request') {
             showToast(`Gagal: ${error.message}`, "error");
         }
+    } finally {
+        isGoogleLoginPending = false;
     }
 }
 document.getElementById('btn-google-login')?.addEventListener('click', handleGoogleLogin);

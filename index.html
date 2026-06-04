@@ -4,6 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Platform pelaporan fasilitas kampus Telkom University yang cepat, transparan, dan mudah digunakan.">
+  
+  <meta name="description" content="Laporin Aja - Platform pelaporan kerusakan fasilitas Telkom University yang responsif dan modern.">
+  <meta name="keywords" content="lapor kerusakan, telkom university, fasilitas kampus, pengaduan">
+  <meta name="author" content="Laporin Aja">
+  
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Laporin Aja | Pelaporan Fasilitas Kampus">
+  <meta property="og:description" content="Platform pelaporan kerusakan fasilitas Telkom University. Lapor cepat, pantau real-time!">
+  <meta property="og:image" content="https://raw.githubusercontent.com/bagusa13/laporinajayu-web/main/og-image.jpg">
+  <meta property="og:url" content="https://laporinaja.vercel.app">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Laporin Aja | Pelaporan Fasilitas Kampus">
+  <meta name="twitter:description" content="Platform pelaporan kerusakan fasilitas Telkom University.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/bagusa13/laporinajayu-web/main/og-image.jpg">
+
+  <!-- SVG Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚨</text></svg>">
+  
   <title>LaporinAja — Sistem Pelaporan Fasilitas Telkom University</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -378,11 +399,11 @@
       
       <div id="form-masuk">
         <div class="form-group-floating">
-          <input type="email" class="form-input-floating" id="masuk-email" placeholder=" " autocomplete="email">
+          <input type="email" class="form-input-floating" id="masuk-email" placeholder=" " autocomplete="email" required>
           <label class="form-label-floating" for="masuk-email">Email</label>
         </div>
         <div class="form-group-floating">
-          <input type="password" class="form-input-floating" id="masuk-password" placeholder=" " autocomplete="current-password">
+          <input type="password" class="form-input-floating" id="masuk-password" placeholder=" " autocomplete="current-password" required>
           <label class="form-label-floating" for="masuk-password">Password</label>
         </div>
         <button class="btn btn-primary btn-md" id="btn-masuk" class="btn-submit-full">Masuk ke Akun</button>
@@ -395,19 +416,19 @@
       
       <div id="form-daftar" style="display:none;">
         <div class="form-group-floating">
-          <input type="text" class="form-input-floating" id="daftar-nama" placeholder=" " autocomplete="name">
+          <input type="text" class="form-input-floating" id="daftar-nama" placeholder=" " autocomplete="name" required minlength="3">
           <label class="form-label-floating" for="daftar-nama">Nama Lengkap</label>
         </div>
         <div class="form-group-floating">
-          <input type="email" class="form-input-floating" id="daftar-email" placeholder=" " autocomplete="email">
+          <input type="email" class="form-input-floating" id="daftar-email" placeholder=" " autocomplete="email" required>
           <label class="form-label-floating" for="daftar-email">Email</label>
         </div>
         <div class="form-group-floating">
-          <input type="password" class="form-input-floating" id="daftar-password" placeholder=" " autocomplete="new-password">
+          <input type="password" class="form-input-floating" id="daftar-password" placeholder=" " autocomplete="new-password" required minlength="8">
           <label class="form-label-floating" for="daftar-password">Password (min. 8 karakter)</label>
         </div>
         <div class="form-group-floating">
-          <input type="password" class="form-input-floating" id="daftar-konfirmasi" placeholder=" " autocomplete="new-password">
+          <input type="password" class="form-input-floating" id="daftar-konfirmasi" placeholder=" " autocomplete="new-password" required minlength="8">
           <label class="form-label-floating" for="daftar-konfirmasi">Konfirmasi Password</label>
         </div>
         <button class="btn btn-primary btn-md" id="btn-daftar" class="btn-submit-full">Buat Akun</button>
@@ -451,7 +472,7 @@
           </div>
         </div>
         <div class="form-group-floating">
-          <input type="text" class="form-input-floating" id="anon-nama" placeholder=" ">
+          <input type="text" class="form-input-floating" id="anon-nama" placeholder=" " required minlength="3">
           <label class="form-label-floating" for="anon-nama">Nama Kamu *</label>
         </div>
         <div class="form-group-floating">
@@ -479,7 +500,7 @@
         <label class="form-label-floating" for="lapor-lokasi">Lokasi</label>
       </div>
       <div class="form-group-floating">
-        <textarea class="form-input-floating" id="lapor-deskripsi" rows="3" placeholder=" " style="resize:vertical;"></textarea>
+        <textarea class="form-input-floating" id="lapor-deskripsi" rows="3" placeholder=" " style="resize:vertical;" required minlength="10"></textarea>
         <label class="form-label-floating" for="lapor-deskripsi">Deskripsi Kendala *</label>
       </div>
       <div class="form-group">
@@ -487,7 +508,7 @@
         <input type="file" class="form-input" id="lapor-foto" accept="image/jpeg,image/png,image/webp,image/gif" style="padding: 12px; background: var(--neutral-0);">
         
         <div id="preview-container" class="preview-container">
-            <img id="foto-preview" src="" alt="Preview foto kerusakan" class="foto-preview">
+            <img id="foto-preview" src="" alt="Preview foto kerusakan" class="foto-preview" loading="lazy">
             <button id="hapus-foto" type="button" aria-label="Hapus foto" class="btn-hapus-foto">✕</button>
         </div>
       </div>

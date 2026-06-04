@@ -974,6 +974,22 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('mouseleave', () => document.body.classList.add('cursor-hidden'));
         document.addEventListener('mouseenter', () => document.body.classList.remove('cursor-hidden'));
 
+        
+        // 4. Progressive Line on Steps
+        const steps = document.querySelectorAll('.step-card');
+        const progressLine = document.getElementById('progress-line');
+        if(steps.length && progressLine) {
+            steps.forEach((step, index) => {
+                step.addEventListener('mouseenter', () => {
+                    const percentage = (index / (steps.length - 1)) * 100;
+                    progressLine.style.width = percentage + '%';
+                });
+                step.addEventListener('mouseleave', () => {
+                    progressLine.style.width = '0%';
+                });
+            });
+        }
+
         // 3. Magnetic Buttons
         const magnetics = document.querySelectorAll('.magnetic');
         magnetics.forEach(btn => {

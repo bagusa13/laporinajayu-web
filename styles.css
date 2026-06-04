@@ -454,6 +454,25 @@ button { font-family: var(--font-primary); outline: none; }
 .step-title { font-size: var(--text-lg); font-weight: var(--weight-bold); color: var(--neutral-900); margin-bottom: var(--space-3); letter-spacing: -0.01em; }
 .step-desc { font-size: var(--text-sm); color: var(--neutral-500); line-height: 1.7; }
 
+
+.progress-line {
+  position: absolute; top: 32px; left: calc(12.5% + 30px); height: 2px;
+  background: linear-gradient(90deg, var(--red-500), var(--red-400)); z-index: 0;
+  width: 0%; max-width: calc(75% - 60px); transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 0 10px rgba(229,62,62,0.5);
+}
+.step-card { overflow: hidden; }
+.step-watermark {
+  position: absolute; bottom: -20px; right: -20px; font-size: 140px; line-height: 1;
+  opacity: 0.02; transition: all 0.6s var(--ease-spring); z-index: 0; pointer-events: none;
+  filter: grayscale(100%);
+}
+.step-card:hover .step-watermark {
+  transform: scale(1.1) rotate(-10deg); opacity: 0.06; filter: grayscale(0%);
+}
+/* Enhanced bouncy badge */
+.step-card:hover .step-number { transform: scale(1.15) translateY(-8px) rotate(-5deg); box-shadow: 0 12px 30px rgba(229,62,62,0.4); }
+
 /* KATEGORI (Magnetic Cards) */
 
 /* CATEGORY IMAGE CARDS */

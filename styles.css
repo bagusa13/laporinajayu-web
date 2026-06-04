@@ -342,6 +342,16 @@ button { font-family: var(--font-primary); outline: none; }
 }
 
 .hero-visual { display: flex; justify-content: center; align-items: center; position: relative; }
+
+/* HERO ANIMATIONS */
+@keyframes slowFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+.hero-card-stack {
+  animation: slowFloat 6s ease-in-out infinite;
+}
+
 .hero-card-stack { position: relative; width: 400px; transform-style: preserve-3d; animation: floatLevitate 6s ease-in-out infinite; }
 .report-card {
   background: rgba(var(--neutral-0-rgb),0.9); backdrop-filter: blur(16px);

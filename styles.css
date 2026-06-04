@@ -1,3 +1,10 @@
+
+/* GLOBAL SELECTION */
+::selection {
+  background-color: var(--red-500);
+  color: white;
+}
+
 /* ============================================================
    LAPORINAJA — DESIGN SYSTEM v4.0 (Anti-Gravity)
    Telkom University · Red Identity

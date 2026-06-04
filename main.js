@@ -598,6 +598,7 @@ document.getElementById('btn-submit-laporan').addEventListener('click', async ()
         document.getElementById('lapor-form-wrapper').style.display = 'none';
         document.getElementById('lapor-success-screen').style.display = 'block';
         document.getElementById('success-ticket-id').innerText = ticketId;
+            if(window.setFavicon) window.setFavicon('success');
         
         katEl.value = '';
         lokEl.value = '';
@@ -932,6 +933,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    
+        // 5. 3D Tilt Hover on Category Cards
+        const catCards = document.querySelectorAll('.category-card-img');
+        catCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const tiltX = ((y - centerY) / centerY) * -8; // Max 8 deg
+                const tiltY = ((x - centerX) / centerX) * 8;
+                card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+            });
+        });
+
     // Check if device supports hover (desktop)
     if (window.matchMedia("(min-width: 1024px) and (hover: hover)").matches) {
         // 2. Custom Cursor
@@ -1021,3 +1041,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+
+// ============================================================
+//   STATEFUL FAVICON
+// ============================================================
+window.setFavicon = function(state) {
+    let svg = '';
+    if (state === 'loading') {
+        svg = `<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="12" stroke="#E53E3E" stroke-width="4" stroke-dasharray="18 18" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" from="0 16 16" to="360 16 16" dur="0.8s" repeatCount="indefinite"/></circle></svg>`;
+    } else if (state === 'success') {
+        svg = `<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="32" rx="8" fill="#10B981"/><path d="M9 16L14 21L23 11" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    } else {
+        svg = `<svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="#E53E3E" /><path d="M11 12C11 10.3431 12.3431 9 14 9H26C27.6569 9 29 10.3431 29 12V22C29 23.6569 27.6569 25 26 25H18.8284C18.298 25 17.7893 25.2107 17.4142 25.5858L14.4142 28.5858C13.5233 29.4767 12 28.8457 12 27.5858V25.1716C11.3914 24.6865 11 23.8967 11 23V12Z" fill="white" fill-opacity="0.2" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 14V18M20 21.5H20.01" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    }
+    const link = document.querySelector("link[rel~='icon']");
+    if (link) {
+        link.href = 'data:image/svg+xml;base64,' + btoa(svg);
+    }
+};

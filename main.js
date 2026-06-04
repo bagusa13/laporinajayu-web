@@ -594,29 +594,20 @@ document.getElementById('btn-submit-laporan').addEventListener('click', async ()
             }
         });
 
-        showToast(`✅ Laporan berhasil dikirim! Tiket: ${ticketId}`);
-
-        btnSubmit.innerHTML = "✅ Berhasil Terkirim!";
-        btnSubmit.style.backgroundColor = "var(--color-success)";
-        btnSubmit.style.borderColor = "var(--color-success)";
-
+        // Show Success Screen instead of closing
+        document.getElementById('lapor-form-wrapper').style.display = 'none';
+        document.getElementById('lapor-success-screen').style.display = 'block';
+        document.getElementById('success-ticket-id').innerText = ticketId;
+        
         katEl.value = '';
         lokEl.value = '';
         desEl.value = '';
         fotoEl.value = '';
-        const anonNama = document.getElementById('anon-nama');
-        const anonEmail = document.getElementById('anon-email');
         if (anonNama) anonNama.value = '';
         if (anonEmail) anonEmail.value = '';
         clearAllErrors();
         document.getElementById('preview-container').style.display = 'none';
-
-        setTimeout(() => {
-            window.closeModal();
-            btnSubmit.style.backgroundColor = "";
-            btnSubmit.style.borderColor = "";
-            btnSubmit.innerHTML = originalBtnContent;
-        }, 1500);
+        btnSubmit.innerHTML = originalBtnContent;
     } catch (err) {
 showToast(err.message || "Gagal mengirim laporan. Coba lagi.", "error");
         btnSubmit.innerHTML = originalBtnContent;
@@ -903,3 +894,11 @@ if (modal) {
 //   INIT
 // ============================================================
 initRealtimeStats();
+window.copyTicketId = function() {
+    const ticketId = document.getElementById('success-ticket-id').innerText;
+    navigator.clipboard.writeText(ticketId).then(() => {
+        showToast("✅ Nomor Tiket disalin ke clipboard!");
+    }).catch(err => {
+        showToast("Gagal menyalin tiket.", "error");
+    });
+};

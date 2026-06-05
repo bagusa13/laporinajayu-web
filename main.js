@@ -1285,6 +1285,11 @@ console.log("%cIngin melihat di balik layar? Kunjungi /admin.html", "font-size: 
 function initPhysics() {
     if (!window.Matter) return;
     
+    // Disable physics engine on mobile and tablet screens (< 1024px) or touch devices to save CPU/GPU and battery
+    if (window.innerWidth < 1024 || window.matchMedia("(any-hover: none)").matches) {
+        return;
+    }
+    
     const container = document.getElementById('matter-container');
     if (!container) return;
 

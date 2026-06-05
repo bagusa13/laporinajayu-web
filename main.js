@@ -38,6 +38,10 @@ const initFirebase = async () => {
             window.__initAuthState();
         }
 
+        // Initialize features that depend on Firebase or DOM ready after lazy load
+        if (typeof initRealtimeStats === 'function') initRealtimeStats();
+        if (typeof initPhysics === 'function') initPhysics();
+
     } catch(e) {
         console.warn("Firebase terblokir (AdBlock/Incognito). Fitur Backend nonaktif.");
     }
@@ -396,97 +400,6 @@ function generateTicketId() {
     const suffix = Math.random().toString(36).substring(2, 5).toUpperCase();
     return `#LAP-${year}-${timestamp}${suffix}`;
 };
-window.handleOverlayClick = function (e) {
-    if (e.target === modal) window.closeModal();
-};
-
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('open')) window.closeModal();
-});
-
-window.switchTab = function (tab) {
-    const isMasuk = tab === 'masuk';
-    const indicator = document.getElementById('tab-indicator');
-    if (indicator) indicator.style.transform = isMasuk ? 'translateX(0)' : 'translateX(100%)';
-    document.getElementById('tab-masuk').classList.toggle('active', isMasuk);
-    document.getElementById('tab-daftar').classList.toggle('active', !isMasuk);
-    document.getElementById('form-masuk').style.display = isMasuk ? 'block' : 'none';
-    document.getElementById('form-daftar').style.display = isMasuk ? 'none' : 'block';
-    clearAllErrors();
-};
-
-// ============================================================
-//   FORM VALIDATION HELPERS
-// ============================================================
-function showError(inputEl, msg) {
-    inputEl.classList.add('input-error');
-    let errEl = inputEl.parentElement.querySelector('.field-error');
-    if (!errEl) {
-        errEl = document.createElement('p');
-        errEl.className = 'field-error';
-        errEl.style.fontSize = '12px';
-        errEl.style.color = 'var(--color-danger)';
-        errEl.style.marginTop = '4px';
-        inputEl.parentElement.appendChild(errEl);
-    }
-    errEl.textContent = msg;
-}
-
-function clearError(inputEl) {
-    inputEl.classList.remove('input-error');
-    const errEl = inputEl.parentElement.querySelector('.field-error');
-    if (errEl) errEl.remove();
-}
-
-function clearAllErrors() {
-    document.querySelectorAll('.input-error').forEach(el => clearError(el));
-}
-
-function isValidEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-document.querySelectorAll('.form-input').forEach(input => {
-    input.addEventListener('input', () => clearError(input));
-});
-
-// ============================================================
-//   UI HELPERS
-// ============================================================
-function setLoadingState(btnId, loading, text = "Memuat...") {
-    const btn = document.getElementById(btnId);
-    if (!btn) return;
-    btn.disabled = loading;
-    if (loading) {
-        btn.dataset.originalText = btn.innerHTML;
-        btn.innerHTML = `<span class="spinner"></span> ${text}`;
-    } else {
-        btn.innerHTML = btn.dataset.originalText || btn.textContent;
-    }
-}
-
-function showToast(message, type = 'success') {
-    const container = document.getElementById('toast-container');
-    const toast = document.createElement('div');
-    toast.className = `toast toast-${type}`;
-    toast.innerText = message;
-    container.appendChild(toast);
-    
-    setTimeout(() => {
-        toast.classList.add('toast-leaving');
-        setTimeout(() => toast.remove(), 400);
-    }, 4000);
-}
-
-// ============================================================
-//   GENERATE TICKET ID
-// ============================================================
-function generateTicketId() {
-    const year = new Date().getFullYear();
-    const timestamp = Date.now().toString(36).toUpperCase();
-    const suffix = Math.random().toString(36).substring(2, 5).toUpperCase();
-    return `#LAP-${year}-${timestamp}${suffix}`;
-}
 
 // ============================================================
 //   HERO & BOTTOM STATS (REAL-TIME)
@@ -812,8 +725,10 @@ document.getElementById('btn-submit-laporan').addEventListener('click', async ()
         lokEl.value = '';
         desEl.value = '';
         fotoEl.value = '';
-        if (anonNama) anonNama.value = '';
-        if (anonEmail) anonEmail.value = '';
+        const inputAnonNama = document.getElementById('anon-nama');
+        const inputAnonEmail = document.getElementById('anon-email');
+        if (inputAnonNama) inputAnonNama.value = '';
+        if (inputAnonEmail) inputAnonEmail.value = '';
         clearAllErrors();
         document.getElementById('preview-container').style.display = 'none';
         btnSubmit.innerHTML = originalBtnContent;
@@ -1089,6 +1004,16 @@ categoryCards.forEach(card => {
         const tiltY = (x - 0.5) * 16;
         
         card.style.transition = 'none';
+categoryCards.forEach(card => {
+    card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+        
+        const tiltX = (y - 0.5) * -16;
+        const tiltY = (x - 0.5) * 16;
+        
+        card.style.transition = 'none';
         card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.02)`;
     });
 
@@ -1117,7 +1042,7 @@ if (modal) {
 // ============================================================
 //   INIT
 // ============================================================
-initRealtimeStats();
+// initRealtimeStats(); // Removed to prevent double initialization
 window.copyTicketId = function() {
     const ticketId = document.getElementById('success-ticket-id').innerText;
     navigator.clipboard.writeText(ticketId).then(() => {
@@ -1468,4 +1393,5 @@ function initPhysics() {
 }
 
 // Initialize Physics when window loads
-window.addEventListener('load', initPhysics);
+// window.addEventListener('load', initPhysics); // Removed to prevent double initialization
+});});

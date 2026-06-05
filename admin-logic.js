@@ -72,6 +72,35 @@ let categoryChartInstance = null;
 
 // ============================================================
 function initAdminDashboard() {
+    const body = document.getElementById('report-table-body');
+    
+    // Optimasi: Event Delegation (Hanya di-bind satu kali di luar onSnapshot)
+    body.addEventListener('click', async (e) => {
+        if (e.target && e.target.classList.contains('btn-save')) {
+            const btn = e.target;
+            const docId = btn.dataset.id;
+            const newStatus = document.querySelector(`.status-dropdown[data-id="${docId}"]`).value;
+            const biayaInput = document.querySelector(`.biaya-input[data-id="${docId}"]`);
+            const biayaVal = biayaInput ? parseFloat(biayaInput.value) || null : null;
+
+            btn.innerText = "...";
+            btn.disabled = true;
+            try {
+                await updateDoc(doc(db, "reports", docId), {
+                    status: newStatus,
+                    estimasiBiaya: biayaVal,
+                    "metadata.updatedAt": new Date()
+                });
+                showToast(`Status & biaya berhasil diperbarui.`);
+            } catch(err) {
+                showToast("Gagal memperbarui data.", "error");
+            } finally {
+                btn.innerText = "Update";
+                btn.disabled = false;
+            }
+        }
+    });
+
     const q = query(collection(db, "reports"), orderBy("metadata.createdAt", "desc"));
 
     onSnapshot(q, (snap) => {
@@ -225,31 +254,7 @@ function initAdminDashboard() {
         document.getElementById('count-selesai').innerText = countSelesai;
         document.getElementById('count-biaya').innerText = formatRupiah(totalBiaya);
 
-        // Event: tombol Update (status + biaya)
-        document.querySelectorAll('.btn-save').forEach(btn => {
-            btn.onclick = async (e) => {
-                const docId = e.target.dataset.id;
-                const newStatus = document.querySelector(`.status-dropdown[data-id="${docId}"]`).value;
-                const biayaInput = document.querySelector(`.biaya-input[data-id="${docId}"]`);
-                const biayaVal = biayaInput ? parseFloat(biayaInput.value) || null : null;
 
-                e.target.innerText = "...";
-                e.target.disabled = true;
-                try {
-                    await updateDoc(doc(db, "reports", docId), {
-                        status: newStatus,
-                        estimasiBiaya: biayaVal,
-                        "metadata.updatedAt": new Date()
-                    });
-                    showToast(`Status & biaya berhasil diperbarui.`);
-                } catch(err) {
-                    showToast("Gagal memperbarui data.", "error");
-                } finally {
-                    e.target.innerText = "Update";
-                    e.target.disabled = false;
-                }
-            };
-        });
 
         // Re-apply filter jika ada
         const filterVal = document.getElementById('filter-status')?.value;

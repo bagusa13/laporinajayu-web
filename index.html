@@ -640,6 +640,25 @@
       </button>
     </div>
 
+    <div id="lapor-success-screen" style="display:none; text-align:center; padding: var(--space-6) 0;">
+      <div class="success-icon-large">✓</div>
+      <div class="modal-title" style="margin-top: var(--space-4);">Laporan Dikirim!</div>
+      <p style="font-size: var(--text-sm); color: var(--neutral-500); margin-top: 4px; line-height: 1.6;">Laporan kerusakan Anda telah berhasil disimpan di pangkalan data.</p>
+      
+      <div class="ticket-box-large">
+        <div style="font-size: 11px; color: var(--neutral-400); font-weight: var(--weight-bold); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Nomor Tiket Anda</div>
+        <div id="success-ticket-id" style="font-family: var(--font-mono); font-size: 20px; font-weight: var(--weight-bold); color: var(--neutral-900);">#LAP-XXXX-XXXX</div>
+        <button class="btn-copy-ticket" onclick="copyTicketId()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Salin Tiket
+        </button>
+      </div>
+
+      <button class="btn btn-primary btn-md" style="margin-top: var(--space-8); width: 100%; justify-content: center;" onclick="closeModal()">
+        Selesai & Tutup
+      </button>
+    </div>
+
   </div>
 </div>
 

@@ -240,6 +240,10 @@ window.openModal = function (type) {
     if (type === 'lapor') {
         panelUser.style.display = 'none';
         panelLapor.style.display = 'block';
+        const formWrapper = document.getElementById('lapor-form-wrapper');
+        const successScreen = document.getElementById('lapor-success-screen');
+        if (formWrapper) formWrapper.style.display = 'block';
+        if (successScreen) successScreen.style.display = 'none';
         updateLaporPanel();
     } else if (type === 'login' || type === 'daftar' || type === 'masuk') {
         panelUser.style.display = 'block';

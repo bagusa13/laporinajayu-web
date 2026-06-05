@@ -78,30 +78,38 @@ if (window.gsap && window.ScrollTrigger && lenis) {
 window.lenis = lenis;
 
 // Migrate all scroll events to a centralized, GPU-efficient loop
-if (lenis) {
-    lenis.on('scroll', (e) => {
+function handleScroll(e) {
+    const scrollY = e ? e.animatedScroll : window.scrollY;
+
     // 1. Navbar State
     const navbar = document.querySelector('.navbar');
-    if (e.animatedScroll > 20) navbar?.classList.add('scrolled');
+    if (scrollY > 20) navbar?.classList.add('scrolled');
     else navbar?.classList.remove('scrolled');
 
     // 2. Scroll Progress Bar
     const scrollProgress = document.getElementById('scroll-progress');
     if (scrollProgress) {
         const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrollPercent = (e.animatedScroll / scrollHeight) * 100;
+        const scrollPercent = (scrollY / scrollHeight) * 100;
         scrollProgress.style.width = scrollPercent + '%';
     }
 
     // 3. Parallax Pattern & Blobs
     const heroBg = document.querySelector('.hero-grid-pattern');
-    if (heroBg) heroBg.style.transform = `translateY(${e.animatedScroll * 0.3}px)`;
+    if (heroBg) heroBg.style.transform = `translateY(${scrollY * 0.3}px)`;
     
     const blobs = document.querySelectorAll('.hero-blob-1, .hero-blob-2');
     blobs.forEach((blob, idx) => {
-        blob.style.transform = `translateY(${e.animatedScroll * (0.15 + (idx * 0.1))}px)`;
+        blob.style.transform = `translateY(${scrollY * (0.15 + (idx * 0.1))}px)`;
     });
-    });
+}
+
+if (lenis) {
+    lenis.on('scroll', handleScroll);
+} else {
+    window.addEventListener('scroll', () => handleScroll());
+    // Trigger once on load
+    window.addEventListener('load', () => handleScroll());
 }
 
 // ============================================================
@@ -128,6 +136,7 @@ window.submitFeedback = async function(ticketId) {
         });
         showToast("Terima kasih atas ulasan Anda!", "success");
         window.handleTrack();
+    } catch (e) {
         showToast("Gagal mengirim ulasan.", "error");
     }
 };

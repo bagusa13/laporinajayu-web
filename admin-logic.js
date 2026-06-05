@@ -119,7 +119,7 @@ function initAdminDashboard() {
                     let stars = '';
                     for(let i=0; i<data.feedback.rating; i++) stars += '★';
                     ulasanHtml = `
-                        <div style="color:#f59e0b; font-size:14px; letter-spacing:2px; margin-bottom:4px;">${stars}</div>
+                        <div style="color:var(--copper-400); font-size:14px; letter-spacing:2px; margin-bottom:4px;">${stars}</div>
                         <div style="font-size:12px; color:var(--neutral-700); line-height:1.4;">"${data.feedback.comment}"</div>
                     `;
                 }
@@ -187,10 +187,35 @@ function initAdminDashboard() {
                     labels: labels,
                     datasets: [{
                         data: values,
-                        backgroundColor: ['#ef4444', '#f97316', '#eab308', '#22c55e', '#3b82f6', '#8b5cf6', '#ec4899', '#64748b']
+                        backgroundColor: [
+                            '#b91c1c', // Crimson
+                            '#ea580c', // Copper
+                            '#ca8a04', // Gold
+                            '#44403c', // Charcoal
+                            '#991b1b', // Deep Crimson
+                            '#c2410c', // Deep Copper
+                            '#78716c', // Warm Stone
+                            '#15803d'  // Forest Green
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 4
                     }]
                 },
-                options: { responsive: true, maintainAspectRatio: false }
+                options: { 
+                    responsive: true, 
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                font: {
+                                    family: "'Manrope', sans-serif",
+                                    weight: 600
+                                },
+                                color: '#44403c'
+                            }
+                        }
+                    }
+                }
             });
         }
 

@@ -32,6 +32,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="dns-prefetch" href="https://www.gstatic.com">
   <link rel="dns-prefetch" href="https://firestore.googleapis.com">
+  
+  <!-- Preconnect for Libraries & APIs (Phase 6) -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  <link rel="dns-prefetch" href="https://unpkg.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://api.cloudinary.com" crossorigin>
+  <link rel="dns-prefetch" href="https://api.cloudinary.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -120,6 +130,7 @@
 
 <section class="hero">
   <div class="hero-bg"></div>
+  <div id="matter-container" style="position: absolute; inset: 0; z-index: 1;"></div>
   <div class="hero-grid-pattern"></div>
   <div class="hero-blob-1"></div>
   <div class="hero-blob-2"></div>
@@ -613,6 +624,15 @@
   </div>
 </div>
 
+<!-- Lenis Smooth Scrolling -->
+<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js" defer></script>
+<!-- GSAP & ScrollTrigger -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<!-- SplitType -->
+<script src="https://unpkg.com/split-type" defer></script>
+<!-- Matter.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js" defer></script>
 <script type="module" src="main.js"></script>
 
 <script>
@@ -632,7 +652,7 @@ function togglePassword(btn) {
 }
 </script>
   <!-- Confetti -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" defer></script>
 
   <script>
     if ('serviceWorker' in navigator) {

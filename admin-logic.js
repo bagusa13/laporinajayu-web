@@ -79,7 +79,8 @@ function initAdminDashboard() {
         if (e.target && e.target.classList.contains('btn-save')) {
             const btn = e.target;
             const docId = btn.dataset.id;
-            const newStatus = document.querySelector(`.status-dropdown[data-id="${docId}"]`).value;
+            const newStatus = document.querySelector(`.status-select[data-id="${docId}"]`).value;
+            const newAssignee = document.querySelector(`.assignee-select[data-id="${docId}"]`).value;
             const biayaInput = document.querySelector(`.biaya-input[data-id="${docId}"]`);
             const biayaVal = biayaInput ? parseFloat(biayaInput.value) || null : null;
 
@@ -88,10 +89,11 @@ function initAdminDashboard() {
             try {
                 await updateDoc(doc(db, "reports", docId), {
                     status: newStatus,
+                    assignee: newAssignee,
                     estimasiBiaya: biayaVal,
                     "metadata.updatedAt": new Date()
                 });
-                showToast(`Status & biaya berhasil diperbarui.`);
+                showToast(`Status, teknisi, & biaya berhasil diperbarui.`);
             } catch(err) {
                 showToast("Gagal memperbarui data.", "error");
             } finally {
@@ -189,10 +191,19 @@ function initAdminDashboard() {
                         </div>
                     </td>
                     <td data-status="${data.status}">
-                        <select class="status-dropdown" data-id="${d.id}">
+                        <select class="status-dropdown status-select" data-id="${d.id}">
                             <option value="Menunggu" ${data.status === 'Menunggu' ? 'selected' : ''}>⏳ Menunggu</option>
                             <option value="Diproses" ${data.status === 'Diproses' ? 'selected' : ''}>🔧 Diproses</option>
                             <option value="Selesai" ${data.status === 'Selesai' ? 'selected' : ''}>✅ Selesai</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="status-dropdown assignee-select" data-id="${d.id}">
+                            <option value="" ${!data.assignee ? 'selected' : ''}>Belum Ditugaskan</option>
+                            <option value="Tim IT" ${data.assignee === 'Tim IT' ? 'selected' : ''}>Tim IT</option>
+                            <option value="Tim AC" ${data.assignee === 'Tim AC' ? 'selected' : ''}>Tim AC</option>
+                            <option value="Sipil" ${data.assignee === 'Sipil' ? 'selected' : ''}>Sipil</option>
+                            <option value="Tim Kelistrikan (ME)" ${data.assignee === 'Tim Kelistrikan (ME)' ? 'selected' : ''}>Tim Kelistrikan (ME)</option>
                         </select>
                     </td>
                     <td class="td-ulasan" style="min-width:180px;">
@@ -270,7 +281,7 @@ window.exportToCSV = function() {
         showToast("Tidak ada data untuk di-export", "error");
         return;
     }
-    const headers = ["Tiket", "Nama Pelapor", "Email", "Kategori", "Lokasi", "Deskripsi", "Status", "Estimasi Biaya", "Waktu Dibuat"];
+    const headers = ["Tiket", "Nama Pelapor", "Email", "Kategori", "Lokasi", "Deskripsi", "Status", "Tim Teknisi", "Estimasi Biaya", "Waktu Dibuat"];
     const rows = currentReportsData.map(d => {
         let tgl = '';
         if (d.metadata?.createdAt?.toDate) tgl = d.metadata.createdAt.toDate().toISOString();
@@ -282,6 +293,7 @@ window.exportToCSV = function() {
             `"${d.content.location}"`,
             `"${d.content.description.replace(/\n/g, ' ')}"`,
             d.status,
+            `"${d.assignee || 'Belum Ditugaskan'}"`,
             d.estimasiBiaya || 0,
             tgl
         ].join(",");

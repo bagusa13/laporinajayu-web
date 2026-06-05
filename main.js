@@ -900,6 +900,13 @@ window.handleTrack = async function () {
                                     <div class="track-result-value">${d.reporterInfo.name} ${isAnon ? '<span style="font-size:10px;background:#f1f5f9;padding:2px 6px;border-radius:4px;color:#64748b;">Anonim</span>' : ''}</div>
                                 </div>
                             </div>
+                            <div class="track-result-row">
+                                <div class="track-result-icon">👷</div>
+                                <div>
+                                    <div class="track-result-label">Tim Teknisi</div>
+                                    <div class="track-result-value">${d.assignee || 'Belum Ditugaskan'}</div>
+                                </div>
+                            </div>
                             ${biayaHtml}
                         </div>
                         <div class="track-progress">
@@ -994,16 +1001,6 @@ if (window.gsap && window.ScrollTrigger) {
 
 // --- 3. Magnetic Hover & 3D Tilt Effect ---
 const categoryCards = document.querySelectorAll('.category-card, .step-card, .feature-small');
-categoryCards.forEach(card => {
-    card.addEventListener('mousemove', e => {
-        const rect = card.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width;
-        const y = (e.clientY - rect.top) / rect.height;
-        
-        const tiltX = (y - 0.5) * -16;
-        const tiltY = (x - 0.5) * 16;
-        
-        card.style.transition = 'none';
 categoryCards.forEach(card => {
     card.addEventListener('mousemove', e => {
         const rect = card.getBoundingClientRect();
@@ -1394,4 +1391,3 @@ function initPhysics() {
 
 // Initialize Physics when window loads
 // window.addEventListener('load', initPhysics); // Removed to prevent double initialization
-});});

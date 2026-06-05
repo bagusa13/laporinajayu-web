@@ -70,18 +70,24 @@
     </div>
   </div>
 </div>
-<!-- Bulletproof Failsafe for Preloader -->
+<!-- Bulletproof Failsafe for Preloader and Visibility -->
 <script>
-  window.addEventListener('load', function() {
-    setTimeout(function() {
-      var p = document.getElementById('page-preloader');
-      if(p && !p.classList.contains('fade-out')) p.classList.add('fade-out');
-    }, 1000);
-  });
-  setTimeout(function() {
+  function applyFailsafe() {
     var p = document.getElementById('page-preloader');
     if(p && !p.classList.contains('fade-out')) p.classList.add('fade-out');
-  }, 5000);
+    if(!window.gsap) {
+      var els = document.querySelectorAll('.reveal-up, .hero-badge, .hero-title, .hero-desc, .hero-actions, .hero-stats');
+      for(var i=0; i<els.length; i++) {
+        els[i].style.opacity = '1';
+        els[i].style.transform = 'none';
+        els[i].style.transition = 'opacity 0.5s ease';
+      }
+    }
+  }
+  window.addEventListener('load', function() {
+    setTimeout(applyFailsafe, 1000);
+  });
+  setTimeout(applyFailsafe, 5000);
 </script>
 
 

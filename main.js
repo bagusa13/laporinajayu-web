@@ -1157,6 +1157,13 @@ function hidePreloader() {
                   .fromTo('.hero-desc', { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, "-=1.3")
                   .fromTo('.hero-actions', { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, "-=1.3")
                   .fromTo('.hero-stats', { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1 }, "-=1.2");
+            } else {
+                // Failsafe: if GSAP is blocked, just force everything visible
+                document.querySelectorAll('.reveal-up, .hero-badge, .hero-title, .hero-desc, .hero-actions, .hero-stats, .section-title, .word, .char').forEach(el => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'none';
+                    el.style.transition = 'opacity 0.5s ease';
+                });
             }
         }, 500);
     }

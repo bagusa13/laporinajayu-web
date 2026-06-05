@@ -70,6 +70,19 @@
     </div>
   </div>
 </div>
+<!-- Bulletproof Failsafe for Preloader -->
+<script>
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      var p = document.getElementById('page-preloader');
+      if(p && !p.classList.contains('fade-out')) p.classList.add('fade-out');
+    }, 1000);
+  });
+  setTimeout(function() {
+    var p = document.getElementById('page-preloader');
+    if(p && !p.classList.contains('fade-out')) p.classList.add('fade-out');
+  }, 5000);
+</script>
 
 
 <div id="toast-container" class="toast-container"></div>

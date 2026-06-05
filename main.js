@@ -47,7 +47,7 @@ const googleProvider = new GoogleAuthProvider();
 // ============================================================
 //   LENIS INTEGRATION (PHASE 2)
 // ============================================================
-const lenis = new window.Lenis({
+const lenis = window.Lenis ? new window.Lenis({
   duration: 1.2,
   easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Apple/Linear smoothness
   direction: 'vertical',
@@ -57,16 +57,16 @@ const lenis = new window.Lenis({
   smoothTouch: false,
   touchMultiplier: 2,
   infinite: false,
-});
+}) : null;
 
 // Sync Lenis with GSAP ScrollTrigger (Phase 3)
-if (window.gsap && window.ScrollTrigger) {
+if (window.gsap && window.ScrollTrigger && lenis) {
     lenis.on('scroll', window.ScrollTrigger.update);
     window.gsap.ticker.add((time) => {
       lenis.raf(time * 1000);
     });
     window.gsap.ticker.lagSmoothing(0);
-} else {
+} else if (lenis) {
     function rafLenis(time) {
       lenis.raf(time);
       requestAnimationFrame(rafLenis);
@@ -78,7 +78,8 @@ if (window.gsap && window.ScrollTrigger) {
 window.lenis = lenis;
 
 // Migrate all scroll events to a centralized, GPU-efficient loop
-lenis.on('scroll', (e) => {
+if (lenis) {
+    lenis.on('scroll', (e) => {
     // 1. Navbar State
     const navbar = document.querySelector('.navbar');
     if (e.animatedScroll > 20) navbar?.classList.add('scrolled');
@@ -100,7 +101,8 @@ lenis.on('scroll', (e) => {
     blobs.forEach((blob, idx) => {
         blob.style.transform = `translateY(${e.animatedScroll * (0.15 + (idx * 0.1))}px)`;
     });
-});
+    });
+}
 
 // ============================================================
 //   FEEDBACK & RATING
@@ -1096,7 +1098,11 @@ window.copyTicketId = function() {
 
 
 // Preloader Logic & Hero Sequence (Phase 3)
-window.addEventListener('load', () => {
+let preloaderHidden = false;
+function hidePreloader() {
+    if (preloaderHidden) return;
+    preloaderHidden = true;
+    
     const preloader = document.getElementById('page-preloader');
     if (preloader) {
         setTimeout(() => {
@@ -1154,7 +1160,11 @@ window.addEventListener('load', () => {
             }
         }, 500);
     }
-});
+}
+
+// Failsafe: hide after 4s max even if load hangs
+window.addEventListener('load', hidePreloader);
+setTimeout(hidePreloader, 4000);
 
 
 /* ==========================================================================

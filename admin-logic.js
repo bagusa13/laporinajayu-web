@@ -72,37 +72,6 @@ let categoryChartInstance = null;
 
 // ============================================================
 function initAdminDashboard() {
-    const body = document.getElementById('report-table-body');
-    
-    // Optimasi: Event Delegation (Hanya di-bind satu kali di luar onSnapshot)
-    body.addEventListener('click', async (e) => {
-        if (e.target && e.target.classList.contains('btn-save')) {
-            const btn = e.target;
-            const docId = btn.dataset.id;
-            const newStatus = document.querySelector(`.status-select[data-id="${docId}"]`).value;
-            const newAssignee = document.querySelector(`.assignee-select[data-id="${docId}"]`).value;
-            const biayaInput = document.querySelector(`.biaya-input[data-id="${docId}"]`);
-            const biayaVal = biayaInput ? parseFloat(biayaInput.value) || null : null;
-
-            btn.innerText = "...";
-            btn.disabled = true;
-            try {
-                await updateDoc(doc(db, "reports", docId), {
-                    status: newStatus,
-                    assignee: newAssignee,
-                    estimasiBiaya: biayaVal,
-                    "metadata.updatedAt": new Date()
-                });
-                showToast(`Status, teknisi, & biaya berhasil diperbarui.`);
-            } catch(err) {
-                showToast("Gagal memperbarui data.", "error");
-            } finally {
-                btn.innerText = "Update";
-                btn.disabled = false;
-            }
-        }
-    });
-
     const q = query(collection(db, "reports"), orderBy("metadata.createdAt", "desc"));
 
     onSnapshot(q, (snap) => {
@@ -133,7 +102,7 @@ function initAdminDashboard() {
 
                 // Status badge warna
                 let statusBadgeClass = '';
-                switch(data.status) {
+                switch (data.status) {
                     case 'Selesai': statusBadgeClass = 'status-badge-selesai'; break;
                     case 'Diproses': statusBadgeClass = 'status-badge-proses'; break;
                     default: statusBadgeClass = 'status-badge-menunggu';
@@ -148,9 +117,9 @@ function initAdminDashboard() {
                 let ulasanHtml = `<span style="color:var(--neutral-400); font-style:italic; font-size:12px;">Belum ada ulasan</span>`;
                 if (data.feedback) {
                     let stars = '';
-                    for(let i=0; i<data.feedback.rating; i++) stars += '★';
+                    for (let i = 0; i < data.feedback.rating; i++) stars += '★';
                     ulasanHtml = `
-                        <div style="color:var(--copper-400); font-size:14px; letter-spacing:2px; margin-bottom:4px;">${stars}</div>
+                        <div style="color:#f59e0b; font-size:14px; letter-spacing:2px; margin-bottom:4px;">${stars}</div>
                         <div style="font-size:12px; color:var(--neutral-700); line-height:1.4;">"${data.feedback.comment}"</div>
                     `;
                 }
@@ -171,8 +140,8 @@ function initAdminDashboard() {
                     </td>
                     <td>
                         ${data.content.imageUrl
-                            ? `<a href="${data.content.imageUrl}" target="_blank" class="view-img">📷 Lihat</a>`
-                            : '<span class="no-img">No Image</span>'}
+                        ? `<a href="${data.content.imageUrl}" target="_blank" class="view-img">📷 Lihat</a>`
+                        : '<span class="no-img">No Image</span>'}
                     </td>
                     <td class="td-biaya">
                         <div class="biaya-input-wrap">
@@ -191,19 +160,10 @@ function initAdminDashboard() {
                         </div>
                     </td>
                     <td data-status="${data.status}">
-                        <select class="status-dropdown status-select" data-id="${d.id}">
+                        <select class="status-dropdown" data-id="${d.id}">
                             <option value="Menunggu" ${data.status === 'Menunggu' ? 'selected' : ''}>⏳ Menunggu</option>
                             <option value="Diproses" ${data.status === 'Diproses' ? 'selected' : ''}>🔧 Diproses</option>
                             <option value="Selesai" ${data.status === 'Selesai' ? 'selected' : ''}>✅ Selesai</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select class="status-dropdown assignee-select" data-id="${d.id}">
-                            <option value="" ${!data.assignee ? 'selected' : ''}>Belum Ditugaskan</option>
-                            <option value="Tim IT" ${data.assignee === 'Tim IT' ? 'selected' : ''}>Tim IT</option>
-                            <option value="Tim AC" ${data.assignee === 'Tim AC' ? 'selected' : ''}>Tim AC</option>
-                            <option value="Sipil" ${data.assignee === 'Sipil' ? 'selected' : ''}>Sipil</option>
-                            <option value="Tim Kelistrikan (ME)" ${data.assignee === 'Tim Kelistrikan (ME)' ? 'selected' : ''}>Tim Kelistrikan (ME)</option>
                         </select>
                     </td>
                     <td class="td-ulasan" style="min-width:180px;">
@@ -227,35 +187,10 @@ function initAdminDashboard() {
                     labels: labels,
                     datasets: [{
                         data: values,
-                        backgroundColor: [
-                            '#b91c1c', // Crimson
-                            '#ea580c', // Copper
-                            '#ca8a04', // Gold
-                            '#44403c', // Charcoal
-                            '#991b1b', // Deep Crimson
-                            '#c2410c', // Deep Copper
-                            '#78716c', // Warm Stone
-                            '#15803d'  // Forest Green
-                        ],
-                        borderWidth: 0,
-                        hoverOffset: 4
+                        backgroundColor: ['#ef4444', '#f97316', '#eab308', '#22c55e', '#3b82f6', '#8b5cf6', '#ec4899', '#64748b']
                     }]
                 },
-                options: { 
-                    responsive: true, 
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            labels: {
-                                font: {
-                                    family: "'Manrope', sans-serif",
-                                    weight: 600
-                                },
-                                color: '#44403c'
-                            }
-                        }
-                    }
-                }
+                options: { responsive: true, maintainAspectRatio: false }
             });
         }
 
@@ -265,7 +200,31 @@ function initAdminDashboard() {
         document.getElementById('count-selesai').innerText = countSelesai;
         document.getElementById('count-biaya').innerText = formatRupiah(totalBiaya);
 
+        // Event: tombol Update (status + biaya)
+        document.querySelectorAll('.btn-save').forEach(btn => {
+            btn.onclick = async (e) => {
+                const docId = e.target.dataset.id;
+                const newStatus = document.querySelector(`.status-dropdown[data-id="${docId}"]`).value;
+                const biayaInput = document.querySelector(`.biaya-input[data-id="${docId}"]`);
+                const biayaVal = biayaInput ? parseFloat(biayaInput.value) || null : null;
 
+                e.target.innerText = "...";
+                e.target.disabled = true;
+                try {
+                    await updateDoc(doc(db, "reports", docId), {
+                        status: newStatus,
+                        estimasiBiaya: biayaVal,
+                        "metadata.updatedAt": new Date()
+                    });
+                    showToast(`Status & biaya berhasil diperbarui.`);
+                } catch (err) {
+                    showToast("Gagal memperbarui data.", "error");
+                } finally {
+                    e.target.innerText = "Update";
+                    e.target.disabled = false;
+                }
+            };
+        });
 
         // Re-apply filter jika ada
         const filterVal = document.getElementById('filter-status')?.value;
@@ -276,12 +235,12 @@ function initAdminDashboard() {
 // ============================================================
 //   EXPORT CSV
 // ============================================================
-window.exportToCSV = function() {
+window.exportToCSV = function () {
     if (currentReportsData.length === 0) {
         showToast("Tidak ada data untuk di-export", "error");
         return;
     }
-    const headers = ["Tiket", "Nama Pelapor", "Email", "Kategori", "Lokasi", "Deskripsi", "Status", "Tim Teknisi", "Estimasi Biaya", "Waktu Dibuat"];
+    const headers = ["Tiket", "Nama Pelapor", "Email", "Kategori", "Lokasi", "Deskripsi", "Status", "Estimasi Biaya", "Waktu Dibuat"];
     const rows = currentReportsData.map(d => {
         let tgl = '';
         if (d.metadata?.createdAt?.toDate) tgl = d.metadata.createdAt.toDate().toISOString();
@@ -293,17 +252,16 @@ window.exportToCSV = function() {
             `"${d.content.location}"`,
             `"${d.content.description.replace(/\n/g, ' ')}"`,
             d.status,
-            `"${d.assignee || 'Belum Ditugaskan'}"`,
             d.estimasiBiaya || 0,
             tgl
         ].join(",");
     });
-    
+
     const csvContent = "data:text/csv;charset=utf-8," + [headers.join(","), ...rows].join("\n");
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", `laporan_kampus_${new Date().toISOString().slice(0,10)}.csv`);
+    link.setAttribute("download", `laporan_kampus_${new Date().toISOString().slice(0, 10)}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

@@ -1,12 +1,11 @@
 
-const CACHE_NAME = 'laporinaja-v5';
+const CACHE_NAME = 'laporinaja-v4';
 const urlsToCache = [
   './',
   './index.html',
   './styles.css',
   './main.js',
   './firebase-config.js',
-  './manifest.json',
   './og-image.png'
 ];
 
@@ -39,17 +38,13 @@ self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request).then(response => {
       return response || fetch(event.request).then(fetchRes => {
-        const url = new URL(event.request.url);
-        if (url.protocol.startsWith('http')) {
-          return caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, fetchRes.clone());
-            return fetchRes;
-          });
-        }
-        return fetchRes;
+        return caches.open(CACHE_NAME).then(cache => {
+          cache.put(event.request, fetchRes.clone());
+          return fetchRes;
+        });
       });
     }).catch(() => {
-        // If offline and not in cache, just fail gracefully
+      // If offline and not in cache, just fail gracefully
     })
   );
 });

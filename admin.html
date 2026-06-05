@@ -1,188 +1,202 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LaporinAdmin — Control Panel</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body class="admin-body">
 
-<div class="noise-overlay"></div>
+    <div class="noise-overlay"></div>
 
-<div id="toast-container" class="toast-container"></div>
+    <div id="toast-container" class="toast-container"></div>
 
-<div id="admin-login-view" class="admin-auth-screen">
-    <div class="admin-auth-card">
-        <div class="admin-auth-header">
-            <div class="admin-badge">Secure Access</div>
-            <h1>Admin Gateway</h1>
-            <p>Masukkan kredensial operasional untuk masuk ke dashboard.</p>
+    <div id="admin-login-view" class="admin-auth-screen">
+        <div class="admin-auth-card">
+            <div class="admin-auth-header">
+                <div class="admin-badge">Secure Access</div>
+                <h1>Admin Gateway</h1>
+                <p>Masukkan kredensial operasional untuk masuk ke dashboard.</p>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Email Operasional</label>
+                <input type="email" id="a-email" class="form-input" placeholder="admin@laporinaja.com">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Password Sistem</label>
+                <input type="password" id="a-pass" class="form-input" placeholder="••••••••">
+            </div>
+            <button class="btn btn-primary btn-md" style="width:100%; justify-content:center;"
+                id="btn-a-login">Otentikasi Sistem</button>
         </div>
-        <div class="form-group">
-            <label class="form-label">Email Operasional</label>
-            <input type="email" id="a-email" class="form-input" placeholder="admin@laporinaja.com">
-        </div>
-        <div class="form-group">
-            <label class="form-label">Password Sistem</label>
-            <input type="password" id="a-pass" class="form-input" placeholder="••••••••">
-        </div>
-        <button class="btn btn-primary btn-md" style="width:100%; justify-content:center;" id="btn-a-login">Otentikasi Sistem</button>
     </div>
-</div>
 
-<div id="admin-main-view" style="display:none;" class="admin-layout">
-    <aside class="admin-sidebar">
-        <div class="sidebar-header">
-            <div class="logo-name">Laporin<span>Admin</span></div>
-        </div>
-        <nav class="sidebar-nav">
-            <a href="#" class="nav-item active">
-                <span class="nav-icon">📊</span> Dashboard Laporan
-            </a>
-            <a href="#" class="nav-item" id="nav-biaya" onclick="scrollToSection('admin-table-area'); return false;">
-                <span class="nav-icon">💰</span> Kelola Biaya
-            </a>
-        </nav>
-        <div class="sidebar-footer">
-            <div class="admin-user-info">
-                <div class="admin-avatar" id="admin-initial">A</div>
-                <div class="admin-details">
-                    <p id="admin-display-name">Sistem Admin</p>
-                    <small id="admin-display-email">admin@mail.com</small>
-                </div>
+    <div id="admin-main-view" style="display:none;" class="admin-layout">
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <div class="logo-name">Laporin<span>Admin</span></div>
             </div>
-            <button class="btn btn-ghost btn-sm" id="a-logout" style="width:100%; margin-top: 15px; border-color: #fee2e2; color: #ef4444;">
-                Tutup Sesi
-            </button>
-        </div>
-    </aside>
-
-    <main class="admin-content">
-        <header class="content-header">
-            <div class="header-title">
-                <h1>Overview Laporan</h1>
-                <p>Manajemen data perbaikan fasilitas kampus secara real-time.</p>
-            </div>
-            <div style="display:flex; align-items:center; gap: 12px;">
-                <div class="header-live-badge">
-                    <span class="header-live-dot"></span> Live
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active">
+                    <span class="nav-icon">📊</span> Dashboard Laporan
+                </a>
+                <a href="#" class="nav-item" id="nav-biaya"
+                    onclick="scrollToSection('admin-table-area'); return false;">
+                    <span class="nav-icon">💰</span> Kelola Biaya
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="admin-user-info">
+                    <div class="admin-avatar" id="admin-initial">A</div>
+                    <div class="admin-details">
+                        <p id="admin-display-name">Sistem Admin</p>
+                        <small id="admin-display-email">admin@mail.com</small>
+                    </div>
                 </div>
-                <button class="btn btn-ghost btn-sm" onclick="location.reload()">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
-                    Refresh
+                <button class="btn btn-ghost btn-sm" id="a-logout"
+                    style="width:100%; margin-top: 15px; border-color: #fee2e2; color: #ef4444;">
+                    Tutup Sesi
                 </button>
             </div>
-        </header>
+        </aside>
 
-        <div class="admin-stats-grid admin-stats-grid--4">
-            <div class="stat-card">
-                <div class="stat-info">
-                    <span class="stat-label">Total Masuk</span>
-                    <h2 id="count-total">0</h2>
+        <main class="admin-content">
+            <header class="content-header">
+                <div class="header-title">
+                    <h1>Overview Laporan</h1>
+                    <p>Manajemen data perbaikan fasilitas kampus secara real-time.</p>
                 </div>
-                <div class="stat-icon" style="background: var(--red-50); color: var(--red-600);">📝</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-info">
-                    <span class="stat-label">Sedang Diproses</span>
-                    <h2 id="count-proses">0</h2>
+                <div style="display:flex; align-items:center; gap: 12px;">
+                    <div class="header-live-badge">
+                        <span class="header-live-dot"></span> Live
+                    </div>
+                    <button class="btn btn-ghost btn-sm" onclick="location.reload()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <polyline points="23 4 23 10 17 10" />
+                            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
+                        </svg>
+                        Refresh
+                    </button>
                 </div>
-                <div class="stat-icon" style="background: rgba(234,88,12,0.1); color: var(--copper-500);">🔧</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-info">
-                    <span class="stat-label">Selesai Perbaikan</span>
-                    <h2 id="count-selesai">0</h2>
-                </div>
-                <div class="stat-icon" style="background: rgba(21,128,61,0.1); color: #15803d;">✅</div>
-            </div>
-            <div class="stat-card stat-card--cost">
-                <div class="stat-info">
-                    <span class="stat-label">Total Estimasi Biaya</span>
-                    <h2 id="count-biaya" style="font-size: 20px;">Rp 0</h2>
-                </div>
-                <div class="stat-icon" style="background: rgba(202,138,4,0.1); color: #ca8a04;">💰</div>
-            </div>
-        </div>
+            </header>
 
-        <div class="admin-table-area" style="margin-bottom: 32px; padding: 24px;">
-            <h3 style="margin-bottom:16px;">Analitik Kategori Laporan</h3>
-            <div style="height: 300px; display: flex; justify-content: center;">
-                <canvas id="categoryChart"></canvas>
-            </div>
-        </div>
-
-        <div class="admin-table-area" id="admin-table-area">
-            <div class="table-header">
-                <h3>Daftar Antrean Laporan</h3>
-                <div class="table-actions" style="display:flex; gap:8px; align-items:center;">
-                    <select id="filter-status" class="status-dropdown" style="min-width: 140px;" onchange="filterTable()">
-                        <option value="">Semua Status</option>
-                        <option value="Menunggu">Menunggu</option>
-                        <option value="Diproses">Diproses</option>
-                        <option value="Selesai">Selesai</option>
-                    </select>
-                    <button class="btn btn-ghost btn-sm" onclick="exportToCSV()" style="border-color:#10b981; color:#059669;">📥 Export CSV</button>
-                    <button class="btn btn-ghost btn-sm" onclick="location.reload()">Refresh Data</button>
+            <div class="admin-stats-grid admin-stats-grid--4">
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <span class="stat-label">Total Masuk</span>
+                        <h2 id="count-total">0</h2>
+                    </div>
+                    <div class="stat-icon" style="background: #eff6ff; color: #3b82f6;">📝</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <span class="stat-label">Sedang Diproses</span>
+                        <h2 id="count-proses">0</h2>
+                    </div>
+                    <div class="stat-icon" style="background: #fefce8; color: #ca8a04;">🔧</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <span class="stat-label">Selesai Perbaikan</span>
+                        <h2 id="count-selesai">0</h2>
+                    </div>
+                    <div class="stat-icon" style="background: #f0fdf4; color: #16a34a;">✅</div>
+                </div>
+                <div class="stat-card stat-card--cost">
+                    <div class="stat-info">
+                        <span class="stat-label">Total Estimasi Biaya</span>
+                        <h2 id="count-biaya" style="font-size: 20px;">Rp 0</h2>
+                    </div>
+                    <div class="stat-icon" style="background: #f0fdf4; color: #16a34a;">💰</div>
                 </div>
             </div>
-            <div class="table-responsive">
-                <table class="modern-table">
-                    <thead>
-                        <tr>
-                            <th>Tiket</th>
-                            <th>Pelapor</th>
-                            <th>Detail Fasilitas</th>
-                            <th>Foto Bukti</th>
-                            <th>Estimasi Biaya</th>
-                            <th>Status Sistem</th>
-                            <th>Tim Teknisi</th>
-                            <th>Ulasan</th>
-                            <th style="text-align: right;">Opsi</th>
-                        </tr>
-                    </thead>
-                    <tbody id="report-table-body"></tbody>
-                </table>
-            </div>
-            <div id="admin-empty-state" class="empty-state" style="display:none;">
-                <div style="font-size: 40px; margin-bottom: 12px;">📭</div>
-                <p>Tidak ada laporan yang ditemukan.</p>
-            </div>
-        </div>
-    </main>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script type="module" src="admin-logic.js"></script>
-<script>
-function scrollToSection(id) {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-}
+            <div class="admin-table-area" style="margin-bottom: 32px; padding: 24px;">
+                <h3 style="margin-bottom:16px;">Analitik Kategori Laporan</h3>
+                <div style="height: 300px; display: flex; justify-content: center;">
+                    <canvas id="categoryChart"></canvas>
+                </div>
+            </div>
 
-// Filter tabel berdasarkan status dengan transisi halus
-window.filterTable = function() {
-    const filterVal = document.getElementById('filter-status').value;
-    const rows = document.querySelectorAll('#report-table-body tr');
-    
-    rows.forEach(row => {
-        row.style.transition = "opacity 0.3s ease";
-        if (!filterVal) {
-            row.style.opacity = "1";
-            setTimeout(() => row.style.display = '', 300);
-        } else {
-            const statusCell = row.querySelector('[data-status]');
-            if (statusCell && statusCell.dataset.status === filterVal) {
-                row.style.display = '';
-                setTimeout(() => row.style.opacity = "1", 10);
-            } else {
-                row.style.opacity = "0";
-                setTimeout(() => row.style.display = 'none', 300);
-            }
+            <div class="admin-table-area" id="admin-table-area">
+                <div class="table-header">
+                    <h3>Daftar Antrean Laporan</h3>
+                    <div class="table-actions" style="display:flex; gap:8px; align-items:center;">
+                        <select id="filter-status" class="status-dropdown" style="min-width: 140px;"
+                            onchange="filterTable()">
+                            <option value="">Semua Status</option>
+                            <option value="Menunggu">Menunggu</option>
+                            <option value="Diproses">Diproses</option>
+                            <option value="Selesai">Selesai</option>
+                        </select>
+                        <button class="btn btn-ghost btn-sm" onclick="exportToCSV()"
+                            style="border-color:#10b981; color:#059669;">📥 Export CSV</button>
+                        <button class="btn btn-ghost btn-sm" onclick="location.reload()">Refresh Data</button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="modern-table">
+                        <thead>
+                            <tr>
+                                <th>Tiket</th>
+                                <th>Pelapor</th>
+                                <th>Detail Fasilitas</th>
+                                <th>Foto Bukti</th>
+                                <th>Estimasi Biaya</th>
+                                <th>Status Sistem</th>
+                                <th>Tim Teknisi</th>
+                                <th>Ulasan</th>
+                                <th style="text-align: right;">Opsi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="report-table-body"></tbody>
+                    </table>
+                </div>
+                <div id="admin-empty-state" class="empty-state" style="display:none;">
+                    <div style="font-size: 40px; margin-bottom: 12px;">📭</div>
+                    <p>Tidak ada laporan yang ditemukan.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="admin-logic.js"></script>
+    <script>
+        function scrollToSection(id) {
+            document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
         }
-    });
-}
-</script>
+
+        // Filter tabel berdasarkan status dengan transisi halus
+        window.filterTable = function () {
+            const filterVal = document.getElementById('filter-status').value;
+            const rows = document.querySelectorAll('#report-table-body tr');
+
+            rows.forEach(row => {
+                row.style.transition = "opacity 0.3s ease";
+                if (!filterVal) {
+                    row.style.opacity = "1";
+                    setTimeout(() => row.style.display = '', 300);
+                } else {
+                    const statusCell = row.querySelector('[data-status]');
+                    if (statusCell && statusCell.dataset.status === filterVal) {
+                        row.style.display = '';
+                        setTimeout(() => row.style.opacity = "1", 10);
+                    } else {
+                        row.style.opacity = "0";
+                        setTimeout(() => row.style.display = 'none', 300);
+                    }
+                }
+            });
+        }
+    </script>
 </body>
+
 </html>

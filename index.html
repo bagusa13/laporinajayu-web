@@ -14,7 +14,6 @@
   <meta name="keywords" content="lapor kerusakan, telkom university, fasilitas kampus, pengaduan">
   <meta name="author" content="Laporin Aja">
 
-  <!-- Open Graph / Social -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Laporin Aja | Pelaporan Fasilitas Kampus">
   <meta property="og:description"
@@ -22,13 +21,11 @@
   <meta property="og:image" content="https://raw.githubusercontent.com/bagusa13/laporinajayu-web/main/og-image.png">
   <meta property="og:url" content="https://laporinaja.vercel.app">
 
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Laporin Aja | Pelaporan Fasilitas Kampus">
   <meta name="twitter:description" content="Platform pelaporan kerusakan fasilitas Telkom University.">
   <meta name="twitter:image" content="https://raw.githubusercontent.com/bagusa13/laporinajayu-web/main/og-image.png">
 
-  <!-- SVG Favicon -->
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚨</text></svg>">
 
@@ -45,14 +42,12 @@
 
 <body>
 
-  <!-- UI Enhancements: Noise, Scroll Progress, Custom Cursor -->
   <div class="noise-overlay"></div>
   <div id="scroll-progress"></div>
   <div class="custom-cursor" id="custom-cursor"></div>
   <div class="custom-cursor-follower" id="custom-cursor-follower"></div>
 
 
-  <!-- PAGE PRELOADER -->
   <div id="page-preloader" class="page-preloader">
     <div class="preloader-content">
       <div class="preloader-logo-pulse">
@@ -533,7 +528,7 @@
   <div class="modal-overlay" id="modal" onclick="handleOverlayClick(event)" aria-modal="true" role="dialog"
     aria-hidden="true">
     <div class="modal-box">
-      <button class="modal-close" onclick="closeModal()" aria-label="Tutup modal" aria-label="Tutup modal">✕</button>
+      <button class="modal-close" onclick="closeModal()" aria-label="Tutup modal">✕</button>
       <div class="modal-logo">
         <svg width="36" height="36" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect width="40" height="40" rx="10" fill="url(#mLogo)" />
@@ -578,9 +573,9 @@
               </svg>
             </button>
           </div>
-          <button class="btn btn-primary btn-md" id="btn-masuk" class="btn-submit-full">Masuk ke Akun</button>
+          <button class="btn btn-primary btn-md btn-submit-full" id="btn-masuk">Masuk ke Akun</button>
           <div class="divider">atau</div>
-          <button type="button" class="btn btn-ghost btn-md" id="btn-google-login" class="btn-full-width">
+          <button type="button" class="btn btn-ghost btn-md btn-full-width" id="btn-google-login">
             <svg width="20" height="20" viewBox="0 0 24 24">
               <path fill="#4285F4"
                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -632,9 +627,9 @@
               </svg>
             </button>
           </div>
-          <button class="btn btn-primary btn-md" id="btn-daftar" class="btn-submit-full">Buat Akun</button>
+          <button class="btn btn-primary btn-md btn-submit-full" id="btn-daftar">Buat Akun</button>
           <div class="divider">atau</div>
-          <button type="button" class="btn btn-ghost btn-md" id="btn-google-reg" class="btn-full-width">
+          <button type="button" class="btn btn-ghost btn-md btn-full-width" id="btn-google-reg">
             <svg width="20" height="20" viewBox="0 0 24 24">
               <path fill="#4285F4"
                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -712,7 +707,7 @@
           </div>
           <div class="form-group-floating">
             <input type="text" class="form-input-floating" id="lapor-lokasi" placeholder=" ">
-            <label class="form-label-floating" for="lapor-lokasi">Lokasi</label>
+            <label class="form-label-floating" for="lapor-lokasi">Lokasi *</label>
           </div>
           <div class="form-group-floating">
             <textarea class="form-input-floating" id="lapor-deskripsi" rows="3" placeholder=" " style="resize:vertical;"
@@ -740,39 +735,63 @@
           </button>
         </div>
 
+        <div id="lapor-success-screen" style="display:none; text-align:center; padding: var(--space-4) 0;">
+          <div class="success-icon-large">🎉</div>
+          <h3 class="modal-title" style="font-size: var(--text-xl);">Laporan Dikirim!</h3>
+          <p style="font-size: var(--text-sm); color: var(--neutral-500); margin-top: 4px;">Teknisi kami akan segera
+            memeriksa lokasi.</p>
+
+          <div class="ticket-box-large">
+            <span
+              style="font-size: var(--text-xs); font-weight: var(--weight-bold); color: var(--neutral-400); text-transform: uppercase; letter-spacing: 0.05em;">Nomor
+              Tiket Anda</span>
+            <div id="success-ticket-id"
+              style="font-family: var(--font-mono); font-size: var(--text-lg); font-weight: var(--weight-extrabold); color: var(--red-600); margin-top: 4px;">
+              #LAP-2026-XXXX</div>
+            <button type="button" class="btn-copy-ticket" onclick="copyTicketId()">
+              📁 Salin Nomor Tiket
+            </button>
+          </div>
+
+          <button class="btn btn-ghost btn-md" style="width: 100%; margin-top: var(--space-6);"
+            onclick="closeModal(); document.getElementById('lapor-form-wrapper').style.display='block'; document.getElementById('lapor-success-screen').style.display='none';">
+            Selesai & Tutup
+          </button>
+        </div>
+
       </div>
     </div>
+  </div>
 
-    <script type="module" src="main.js"></script>
+  <script type="module" src="main.js"></script>
 
-    <script>
-      function togglePassword(btn) {
-        const container = btn.closest('.form-group-floating');
-        const input = container.querySelector('input');
-        const svg = btn.querySelector('svg');
-        if (input.type === 'password') {
-          input.type = 'text';
-          svg.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>';
-          btn.setAttribute('aria-label', 'Sembunyikan password');
-        } else {
-          input.type = 'password';
-          svg.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>';
-          btn.setAttribute('aria-label', 'Tampilkan password');
-        }
+  <script>
+    function togglePassword(btn) {
+      const container = btn.closest('.form-group-floating');
+      const input = container.querySelector('input');
+      const svg = btn.querySelector('svg');
+      if (input.type === 'password') {
+        input.type = 'text';
+        svg.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>';
+        btn.setAttribute('aria-label', 'Sembunyikan password');
+      } else {
+        input.type = 'password';
+        svg.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>';
+        btn.setAttribute('aria-label', 'Tampilkan password');
       }
-    </script>
-    <!-- Confetti -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('./sw.js').then(reg => {
-            console.log('SW registered: ', reg.scope);
-          }).catch(err => console.log('SW registration failed: ', err));
-        });
-      }
-    </script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').then(reg => {
+          console.log('SW registered: ', reg.scope);
+        }).catch(err => console.log('SW registration failed: ', err));
+      });
+    }
+  </script>
 
 </body>
 

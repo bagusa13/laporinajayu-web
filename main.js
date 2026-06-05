@@ -245,6 +245,7 @@ window.switchTab = function (tab) {
 //   FORM VALIDATION HELPERS
 // ============================================================
 function showError(inputEl, msg) {
+    if (!inputEl) return;
     inputEl.classList.add('input-error');
     let errEl = inputEl.parentElement.querySelector('.field-error');
     if (!errEl) {
@@ -259,6 +260,7 @@ function showError(inputEl, msg) {
 }
 
 function clearError(inputEl) {
+    if (!inputEl) return;
     inputEl.classList.remove('input-error');
     const errEl = inputEl.parentElement.querySelector('.field-error');
     if (errEl) errEl.remove();
@@ -629,8 +631,13 @@ document.getElementById('btn-submit-laporan').addEventListener('click', async ()
         lokEl.value = '';
         desEl.value = '';
         fotoEl.value = '';
-        if (anonNama) anonNama.value = '';
-        if (anonEmail) anonEmail.value = '';
+
+        // --- AMAN DARI ERROR: Selektor Element Langsung Lewat DOM ---
+        const targetAnonNama = document.getElementById('anon-nama');
+        const targetAnonEmail = document.getElementById('anon-email');
+        if (targetAnonNama) targetAnonNama.value = '';
+        if (targetAnonEmail) targetAnonEmail.value = '';
+
         clearAllErrors();
         document.getElementById('preview-container').style.display = 'none';
         btnSubmit.innerHTML = originalBtnContent;
@@ -854,7 +861,6 @@ document.querySelectorAll('.btn').forEach(btn => {
         ripple.style.left = `${x}px`;
         ripple.style.top = `${y}px`;
 
-        // Calculate max distance to corner for proper ripple size
         const w = this.clientWidth, h = this.clientHeight;
         const size = Math.max(w, h) * 1.5;
         ripple.style.width = ripple.style.height = `${size}px`;
@@ -934,7 +940,6 @@ window.copyTicketId = function () {
 window.addEventListener('load', () => {
     const preloader = document.getElementById('page-preloader');
     if (preloader) {
-        // Add a slight delay for aesthetic purposes so the bar animation finishes
         setTimeout(() => {
             preloader.classList.add('fade-out');
         }, 500);
@@ -947,7 +952,6 @@ window.addEventListener('load', () => {
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Scroll Progress Bar
     const scrollProgress = document.getElementById('scroll-progress');
     if (scrollProgress) {
         window.addEventListener('scroll', () => {
@@ -958,8 +962,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
-    // 5. 3D Tilt Hover on Category Cards
     const catCards = document.querySelectorAll('.category-card-img');
     catCards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
@@ -968,7 +970,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const y = e.clientY - rect.top;
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-            const tiltX = ((y - centerY) / centerY) * -8; // Max 8 deg
+            const tiltX = ((y - centerY) / centerY) * -8;
             const tiltY = ((x - centerX) / centerX) * 8;
             card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
         });
@@ -977,8 +979,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-
-    // 6. Parallax Background
     window.addEventListener('scroll', () => {
         const scrollY = window.scrollY;
         const heroBg = document.querySelector('.hero-grid-pattern');
@@ -990,9 +990,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Check if device supports hover (desktop)
     if (window.matchMedia("(min-width: 1024px) and (hover: hover)").matches) {
-        // 2. Custom Cursor
         const cursor = document.getElementById('custom-cursor');
         const follower = document.getElementById('custom-cursor-follower');
 
@@ -1003,15 +1001,13 @@ document.addEventListener('DOMContentLoaded', () => {
             mouseX = e.clientX;
             mouseY = e.clientY;
 
-            // Immediate update for the dot
             if (cursor) {
                 cursor.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
             }
         });
 
-        // Smooth trailing for the follower
         function animateFollower() {
-            followerX += (mouseX - followerX) * 0.45; // reduced delay
+            followerX += (mouseX - followerX) * 0.45;
             followerY += (mouseY - followerY) * 0.45;
 
             if (follower) {
@@ -1021,19 +1017,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         animateFollower();
 
-        // Add hover effects to interactable elements
         const interactables = document.querySelectorAll('a, button, input, select, textarea, .category-card-img, .logo');
         interactables.forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
         });
 
-        // Hide cursor when it leaves window
         document.addEventListener('mouseleave', () => document.body.classList.add('cursor-hidden'));
         document.addEventListener('mouseenter', () => document.body.classList.remove('cursor-hidden'));
 
-
-        // 4. Progressive Line on Steps
         const steps = document.querySelectorAll('.step-card');
         const progressLine = document.getElementById('progress-line');
         if (steps.length && progressLine) {
@@ -1048,10 +1040,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // 3. Magnetic Buttons
         const magnetics = document.querySelectorAll('.magnetic');
         magnetics.forEach(btn => {
-            // Wrap content in span if not already to parallax text
             if (!btn.querySelector('span')) {
                 const inner = btn.innerHTML;
                 btn.innerHTML = `<span>${inner}</span>`;
@@ -1064,7 +1054,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
 
-                // Calculate pull (max 15px)
                 const pullX = (x - rect.width / 2) / (rect.width / 2) * 6;
                 const pullY = (y - rect.height / 2) / (rect.height / 2) * 6;
 

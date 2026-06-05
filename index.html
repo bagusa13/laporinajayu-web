@@ -75,7 +75,7 @@
   function applyFailsafe() {
     var p = document.getElementById('page-preloader');
     if(p && !p.classList.contains('fade-out')) p.classList.add('fade-out');
-    if(!window.gsap) {
+    if(!window.__hero_revealed) {
       var els = document.querySelectorAll('.reveal-up, .hero-badge, .hero-title, .hero-desc, .hero-actions, .hero-stats');
       for(var i=0; i<els.length; i++) {
         els[i].style.opacity = '1';

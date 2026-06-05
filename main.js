@@ -1116,6 +1116,7 @@ function hidePreloader() {
     if (preloader) {
         setTimeout(() => {
             preloader.classList.add('fade-out');
+            window.__hero_revealed = true;
             
             if(window.gsap && window.SplitType) {
                 // Initialize Typography (Phase 4)

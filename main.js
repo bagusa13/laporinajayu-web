@@ -1,25 +1,49 @@
-import { auth, db } from './firebase-config.js';
-import {
-    signInWithEmailAndPassword,
-    createUserWithEmailAndPassword,
-    onAuthStateChanged,
-    signOut,
-    updateProfile,
-    GoogleAuthProvider,
-    signInWithPopup
-} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import {
-    collection,
-    addDoc,
-    serverTimestamp,
-    query,
-    where,
-    getDocs,
-    getCountFromServer,
-    onSnapshot,
-    doc,
-    updateDoc
-} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+let auth, db;
+let signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile, GoogleAuthProvider, signInWithPopup;
+let collection, addDoc, serverTimestamp, query, where, getDocs, getCountFromServer, onSnapshot, doc, updateDoc;
+
+let currentUser = null;
+let laporMode = 'akun'; // 'akun' | 'anon'
+let googleProvider = null;
+
+const initFirebase = async () => {
+    try {
+        const fbApp = await import('./firebase-config.js');
+        auth = fbApp.auth; db = fbApp.db;
+
+        const fbAuth = await import("https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js");
+        signInWithEmailAndPassword = fbAuth.signInWithEmailAndPassword;
+        createUserWithEmailAndPassword = fbAuth.createUserWithEmailAndPassword;
+        onAuthStateChanged = fbAuth.onAuthStateChanged;
+        signOut = fbAuth.signOut;
+        updateProfile = fbAuth.updateProfile;
+        GoogleAuthProvider = fbAuth.GoogleAuthProvider;
+        signInWithPopup = fbAuth.signInWithPopup;
+
+        const fbStore = await import("https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js");
+        collection = fbStore.collection;
+        addDoc = fbStore.addDoc;
+        serverTimestamp = fbStore.serverTimestamp;
+        query = fbStore.query;
+        where = fbStore.where;
+        getDocs = fbStore.getDocs;
+        getCountFromServer = fbStore.getCountFromServer;
+        onSnapshot = fbStore.onSnapshot;
+        doc = fbStore.doc;
+        updateDoc = fbStore.updateDoc;
+
+        googleProvider = new GoogleAuthProvider();
+        
+        if (typeof window.__initAuthState === 'function') {
+            window.__initAuthState();
+        }
+
+    } catch(e) {
+        console.warn("Firebase terblokir (AdBlock/Incognito). Fitur Backend nonaktif.");
+    }
+};
+
+initFirebase();
 
 
 // ==========================================
@@ -40,10 +64,6 @@ window.addEventListener('online', () => {
 // ============================================================
 //   STATE
 // ============================================================
-let currentUser = null;
-let laporMode = 'akun'; // 'akun' | 'anon'
-const googleProvider = new GoogleAuthProvider();
-
 // ============================================================
 //   LENIS INTEGRATION (PHASE 2)
 // ============================================================
@@ -533,32 +553,34 @@ function triggerUpdateAnim(element) {
 // ============================================================
 //   AUTH STATE
 // ============================================================
-onAuthStateChanged(auth, (user) => {
-    currentUser = user;
-    const deskNav = document.getElementById('desktop-auth-container');
-    const mobNav = document.getElementById('mobile-auth-container');
+window.__initAuthState = function() {
+    onAuthStateChanged(auth, (user) => {
+        currentUser = user;
+        const deskNav = document.getElementById('desktop-auth-container');
+        const mobNav = document.getElementById('mobile-auth-container');
 
-    if (user) {
-        const displayName = user.displayName || 'User';
-        const loggedInHtml = `
-            <span style="font-size:13px; font-weight:bold; margin-right:8px; color: var(--neutral-700);">Hi, ${displayName.split(' ')[0]}! 👋</span>
-            <button class="btn btn-primary btn-sm" onclick="openModal('lapor')">Buat Laporan</button>
-            <button class="btn btn-ghost btn-sm btn-logout" style="border-color:var(--color-danger); color:var(--color-danger)">Keluar</button>
-        `;
-        deskNav.innerHTML = loggedInHtml;
-        mobNav.innerHTML = loggedInHtml.replace(/btn-sm/g, 'btn-md');
-        document.querySelectorAll('.btn-logout').forEach(btn => {
-            btn.addEventListener('click', () => signOut(auth));
-        });
-    } else {
-        const loggedOutHtml = `
-            <button class="btn btn-ghost btn-sm" onclick="openModal('login')">Masuk</button>
-            <button class="btn btn-primary btn-sm" onclick="openModal('lapor')">Mulai Lapor</button>
-        `;
-        deskNav.innerHTML = loggedOutHtml;
-        mobNav.innerHTML = loggedOutHtml.replace(/btn-sm/g, 'btn-md');
-    }
-});
+        if (user) {
+            const displayName = user.displayName || 'User';
+            const loggedInHtml = `
+                <span style="font-size:13px; font-weight:bold; margin-right:8px; color: var(--neutral-700);">Hi, ${displayName.split(' ')[0]}! 👋</span>
+                <button class="btn btn-primary btn-sm" onclick="openModal('lapor')">Buat Laporan</button>
+                <button class="btn btn-ghost btn-sm btn-logout" style="border-color:var(--color-danger); color:var(--color-danger)">Keluar</button>
+            `;
+            if (deskNav) deskNav.innerHTML = loggedInHtml;
+            if (mobNav) mobNav.innerHTML = loggedInHtml.replace(/btn-sm/g, 'btn-md');
+            document.querySelectorAll('.btn-logout').forEach(btn => {
+                btn.addEventListener('click', () => signOut(auth));
+            });
+        } else {
+            const loggedOutHtml = `
+                <button class="btn btn-ghost btn-sm" onclick="openModal('login')">Masuk</button>
+                <button class="btn btn-primary btn-sm" onclick="openModal('lapor')">Mulai Lapor</button>
+            `;
+            if (deskNav) deskNav.innerHTML = loggedOutHtml;
+            if (mobNav) mobNav.innerHTML = loggedOutHtml.replace(/btn-sm/g, 'btn-md');
+        }
+    });
+};
 
 // ============================================================
 //   GOOGLE LOGIN
